@@ -10,8 +10,8 @@
   </nav>
   <div class="text-box">
     <h1>World's Biggest Makeup Artist Platform</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime molestias iste ducimus! <br>
-      Doloremque repellendus voluptatem maiores vero fuga, iusto quam!</p>
-    <a href="" class="hero-btn">Visit us to know more</a>
+    <p>You can find here the varity of makeup services from the best makeup artists. 
+      <br> Our makeup asrtists are very much passionate about their work and they make you more beautiful with their creative touch.</p>
+   
   </div>
 </section><?php /**PATH E:\Samanta\Laravel\Makeup_Artist\resources\views/frontend/include/header.blade.php ENDPATH**/ ?>

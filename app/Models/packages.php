@@ -11,10 +11,15 @@ class packages extends Model
     protected $guarded = [];
     public function  category()
     {
-        return $this ->belongsTo(category::class, 'cat_id', 'id');
+        return $this->belongsTo(category::class, 'cat_id', 'id');
     }
     public function  sub_category()
     {
-        return $this ->belongsTo(sub_category::class, 'sub_cat_id', 'id');
+        return $this->belongsTo(sub_category::class, 'sub_cat_id', 'id');
+    }
+
+    public function  makeupartist()
+    {
+        return $this->belongsTo(User::class, 'makeup_artist_id', 'id');
     }
 }

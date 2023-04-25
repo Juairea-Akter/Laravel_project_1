@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\category;
 use App\Models\order;
 use App\Models\packages;
+use App\Models\payment;
 use App\Models\sub_category;
 use App\Models\sub_order;
 use App\Models\User;
@@ -62,15 +63,19 @@ class FrontendController extends Controller
    public function add_cart($id)
    {
       $package = packages::where('id', $id)->first();
-     
-      $cart_add = Cart::add([
-         'id' => $package->id,
-         'name' => $package->package_name,
-         'price' => $package->package_price,
-         'qty' => 1,
-         'weight' => 1,
-         'options' => ['size' => 'large']
-      ]);
+      $carts = Cart::content();
+
+      if (count($carts) < 1) {
+         $cart_add = Cart::add([
+            'id' => $package->id,
+            'name' => $package->package_name,
+            'price' => $package->package_price,
+            'qty' => 1,
+            'weight' => 1,
+            'options' => ['size' => 'large']
+         ]);
+      }
+
       return redirect()->back();
    }
 
@@ -94,19 +99,54 @@ class FrontendController extends Controller
       return redirect()->back();
    }
 
+   // SUBMIT
+   public function submit(Request $request, $id, $subtotal, $qty)
+   {
+      $order = order::create([
+         'user_id' => auth()->user()->id,
+         'address' => auth()->user()->address,
+         'email' => auth()->user()->email,
+         'phone' => auth()->user()->phone,
+         'total' => floatval(str_replace(',', '', $subtotal))
+      ]);
+
+      $pak = packages::where('id', $id)->first();
+      $pak2 = $pak->id;
+      $pak1 = $pak->package_price;
+
+      sub_order::create(
+         [
+            'order_id' => $order->id,
+            'package_id' => $id,
+            'quantity' => $qty,
+            'sub_total' => $subtotal,
+            'user_id' => auth()->user()->id,
+            'time' => $request->time,
+            'date' => $request->date,
+            'price' => $pak1,
+         ]
+      );
+
+      $time = $request->time;
+      $date = $request->date;
+      //dd($time,$date);
+
+      return redirect()->route('payment', compact('time', 'date', 'pak2'));
+   }
 
    // PLACE ORDER
    public function place_order(Request $request)
    {
+
       $carts = Cart::content();
       $total = Cart::total();
       $order = order::create([
-            'user_id' => auth()->user()->id,
-            'address' => auth()->user()->address,
-            'email' => auth()->user()->email,
-            'phone' => auth()->user()->phone,
-            'total' => floatval(str_replace(',', '', $total))
-         ]);
+         'user_id' => auth()->user()->id,
+         'address' => auth()->user()->address,
+         'email' => auth()->user()->email,
+         'phone' => auth()->user()->phone,
+         'total' => floatval(str_replace(',', '', $total))
+      ]);
       foreach ($carts as $key => $data) {
          sub_order::create(
             [
@@ -114,19 +154,55 @@ class FrontendController extends Controller
                'package_id' => $data->id,
                'price' => $data->price,
                'quantity' => $data->qty,
-               'sub_total' => $data->qty * $data->price
+               'sub_total' => $data->qty * $data->subtotal,
+               'time' => $request->time,
+               'date' => $request->date,
             ]
          );
-
-         
       }
       Cart::destroy();
       return redirect()->route('payment');
    }
-
-   public function payment()
+   public function sub_order_delete($value)
    {
-     return view('frontend.layouts.service.place_order.payment');
+      $sub = sub_order::find($value);
+      $sub->delete();
+      return redirect()->route('cart_list');
+   }
+
+
+
+   // PAYMENT
+   public function payment($time, $date, $pak2)
+   {
+      $value = sub_order::where('time', $time)->where('date', $date)->where('user_id', auth()->user()->id)->where('package_id', $pak2)->first();
+
+      //dd($value);
+      //dd($time,$date);
+      return view('frontend.layouts.service.place_order.payment', compact('value', 'pak2'));
+   }
+   public function payment_submit(Request $request, $pak2)
+   {
+
+      $makeup = packages::where('id', $pak2)->first();
+      $makeup1 = $makeup->makeup_artist_id;
+      $makeup2 = $makeup->id;
+
+
+      payment::create([
+         'name' => $request->name,
+         'user_id' => auth()->user()->id,
+         'address' => $request->address,
+         'email' => $request->email,
+         'phone' => auth()->user()->phone,
+         'transaction_number' => $request->transaction_number,
+         'transaction_amount' => $request->transaction_amount,
+         'package_id' => $makeup2,
+         'makeup_artist_id' => $makeup1,
+         'status' => 1,
+         'date' => $request->date,
+      ]);
+      return redirect()->back();
    }
 
 
@@ -192,5 +268,14 @@ class FrontendController extends Controller
       ]);
 
       return redirect()->back()->with("success", " Registration successful");
+   }
+
+
+   public function customer_payment_details()
+   {
+      $id = auth()->user()->id;
+      $payments = payment::where('user_id', $id)->get();
+      // dd($payment1);
+      return view('frontend.layouts.payment_details', compact('payments'));
    }
 }

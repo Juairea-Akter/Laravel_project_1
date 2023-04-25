@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin_dashboard\DashboardController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\backend\BackendController;
 use App\Http\Controllers\category\CategoryController;
 use App\Http\Controllers\makeupartist\ArtistController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 // ADMIN
 Route::get('admin/login', [BackendController::class, 'admin_login'])->name('admin_login');
 Route::post('/login', [BackendController::class, 'login'])->name('login');
-Route::get('dashboard', [BackendController::class, 'dashboard'])->name('dashboard');
+Route::get('dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 Route::get('signout', [BackendController::class, 'signout'])->name('signout');
 
 Route::middleware(['admin_check'])->group(function () {
@@ -49,6 +51,7 @@ Route::middleware(['admin_check'])->group(function () {
     Route::get('customer/list/delete/{id}', [BackendController::class, 'customer_list_delete'])->name('customer_list_delete');
 
 
+
     // CATEGORIES
     Route::get('category/list', [CategoryController::class, 'cat_list'])->name('cat_list');
     Route::post('category/add', [CategoryController::class, 'cat_add'])->name('cat_add');
@@ -70,6 +73,9 @@ Route::middleware(['admin_check'])->group(function () {
 
     // PACKAGE LIST
     Route::get('package/list', [BackendController::class, 'package_list'])->name('package_list');
+    // PAYMENT LIST
+    Route::get('payment/list', [BackendController::class, 'payment_list'])->name('payment_list');
+    Route::put('payment/list/upadate/{id}', [BackendController::class, 'payment_list_update'])->name('payment_list_update');
 });
 
 // ---FRONTEND----
@@ -124,7 +130,14 @@ Route::post('place/order', [FrontendController::class, 'place_order'])->name('pl
 
 
 // PAYMENT
-Route::get('/payment', [FrontendController::class, 'payment'])->name('payment');
+Route::get('customer/payment/details', [FrontendController::class, 'customer_payment_details'])->name('customer_payment_details');
+Route::get('/payment/{time}/{date}/{pak2}', [FrontendController::class, 'payment'])->name('payment');
+Route::post('/payment/{pak2}', [FrontendController::class, 'payment_submit'])->name('payment_submit');
+Route::get('/sub_order/delete/{value}', [FrontendController::class, 'sub_order_delete'])->name('sub_order_delete');
+
+// SUBMIT PAYMENT Update
+Route::post('submit/{id}/{subtotal}/{qty}', [FrontendController::class, 'submit'])->name('submit');
+
 
 
 

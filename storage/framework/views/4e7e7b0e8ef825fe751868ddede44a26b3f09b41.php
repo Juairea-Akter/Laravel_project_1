@@ -3,10 +3,14 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th scope="col">Serial</th>
+      <th scope="col">Customer Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Packages Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Qunatity</th>
+      <th scope="col">Price</th>
     </tr>
   </thead>
   <tbody>
@@ -15,17 +19,6 @@
       <td>Mark</td>
       <td>Otto</td>
       <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
     </tr>
   </tbody>
 </table>

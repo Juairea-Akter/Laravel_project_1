@@ -13,16 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sub_orders', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('order_id')->nullable();
+            $table->string('name');
             $table->bigInteger('user_id')->nullable();
-            $table->string('package_id')->nullable();
-            $table->string('price')->nullable();
-            $table->string('quantity')->nullable();
-            $table->integer('sub_total')->nullable();
-            $table->string('time');
-            $table->date('date')->nullable();
+            $table->string('address');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('transaction_number');
+            $table->string('transaction_amount');
+            $table->string('package_id');
+            $table->string('makeup_artist_id');
+            $table->string('status'); 
+            $table->string('date');
             $table->timestamps();
         });
     }
@@ -34,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_orders');
+        Schema::dropIfExists('payments');
     }
 };

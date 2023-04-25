@@ -51,6 +51,12 @@
               Package List
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="<?php echo e(route('payment_list')); ?>">
+              <span data-feather="shopping-cart" class="align-text-bottom"></span>
+              Payment
+            </a>
+          </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">

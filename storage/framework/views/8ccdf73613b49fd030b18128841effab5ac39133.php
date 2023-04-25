@@ -7,6 +7,7 @@
         <li><a href="/">About</a></li>
         <li><a href="/#serviceSection">Service</a></li>
         <li><a href="/">Contact</a></li>
+        <li><a href="<?php echo e(route('customer_payment_details')); ?>">Payment</a></li>
 
         <li><a class=" " id="" href="<?php echo e(route('signout')); ?>" aria-expanded="false">Sign Out</a></li>
 

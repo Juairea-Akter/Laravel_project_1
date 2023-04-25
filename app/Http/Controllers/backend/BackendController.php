@@ -5,8 +5,11 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Models\category;
 use App\Models\co_artist;
+use App\Models\order;
 use App\Models\packages;
+use App\Models\payment;
 use App\Models\sub_category;
+use App\Models\sub_order;
 use App\Models\User;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Http\Request;
@@ -39,16 +42,48 @@ class BackendController extends Controller
    {
       return view('backend.layout.admin_login');
    }
-   public function dashboard()
-   {
-      return view('backend.layout.dashboard');
-   }
+   // public function dashboard()
+   // {
+   //    $orders = order::all();
+   //    $suborders = sub_order::all();
+   //    $totalOrderPrice = 0;
+   //    foreach ($orders as $key => $order) {
+   //       foreach ($suborders as $key1 => $sub_order) {
+   //          if ($order->id == $sub_order->order_id) {
+   //             $totalOrderPrice = $totalOrderPrice + $sub_order->price;
+   //          }
+   //       }
+   //    }
+   //    return view('backend.layout.dashboard', compact("totalOrderPrice"));
+   // }
 
    // ORDER
    public function order()
    {
-      return view('backend.layout.order');
+      $orders = order::all();
+      $sub_orders = sub_order::all();
+      echo "Order table";
+      // foreach ($orders as $key => $order) {
+
+      //    // dd($orders);
+      //    foreach ($sub_orders as $key1 => $sub_order) {
+      //       if ($order->id == $sub_order->order_id) {
+
+      //          $pak_id = sub_order::where('order_id', $order->id)->first();
+      //          $pak_id1 = $pak_id->package_id;
+      //          $pak = packages::where('id', $pak_id1)->first();
+      //          $pak_id2 = $pak->makeup_artist_id;
+      //          // dd($pak_id2);
+      //          $name = User::where('id', $pak_id2)->first();
+      //          // dd($name);
+
+      //       }
+      //    }
+      // }
+      return view('backend.layout.orders.order', compact('orders', 'sub_orders'));
    }
+
+
 
 
 
@@ -167,7 +202,25 @@ class BackendController extends Controller
       return view('backend.layout.packages.package_list', compact('categories', 'sub_categories', 'packages'));
    }
 
- 
+   // PAYMENT LIST
+   public function payment_list()
+   {
+      $payments = payment::all();
+      return view('backend.layout.payment.payment_list', compact('payments'));
+   }
+   // 
+   public function payment_list_update($id)
+   {
+      $payment = payment::find($id);
+
+      $payment->update([
+         'status' => "2",
+      ]);
+
+      return redirect()->route('payment_list');
+   }
+
+
 
    // SIGN OUT
    public function signout(Request $request)

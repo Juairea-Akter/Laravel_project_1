@@ -2,7 +2,7 @@
 @section('content')
 @include('frontend.include.navbar')
 
-<table class="table table-dark">
+<table class="table">
   <thead>
     <tr>
       <th scope="col">Serial</th>

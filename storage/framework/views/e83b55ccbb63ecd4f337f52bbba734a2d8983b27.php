@@ -2,7 +2,7 @@
 <?php $__env->startSection('content'); ?>
 <?php echo $__env->make('frontend.include.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-<table class="table table-dark">
+<table class="table">
   <thead>
     <tr>
       <th scope="col">Serial</th>

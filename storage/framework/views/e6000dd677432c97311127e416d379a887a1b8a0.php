@@ -1,7 +1,7 @@
 
 <?php $__env->startSection('content'); ?>
 <?php echo $__env->make('frontend.include.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<table class="table table-dark">
+<table class="table">
   <thead>
     <tr>
       <th scope="col">Serial</th>
@@ -159,21 +159,24 @@
         margin-bottom: 20px;
       }
     }
+
+    
   </style>
 </head>
 
 <body>
+<?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-  <h2>Cart Detaits</h2>
+
 
   <div class="row">
     <div class="col-75">
       <div class="container">
-        <form action="<?php echo e(route('place_order')); ?>" method="post" enctype="multipart/form-data">
-          <?php echo csrf_field(); ?>
+        <form action="<?php echo e(route('submit',[$data->id,$data->subtotal,$data->qty])); ?> "method="post">
+<?php echo csrf_field(); ?>
           <div class="row">
             <div class="col-50">
-              <h3>Billing Address</h3>
+              <h3>Cart Details</h3>
               <label for="fname"><i class="fa fa-user"></i> Full Name</label>
               <input type="text" name="name" id="name" value="<?php echo e(auth()->user()->name); ?>">
               <label for="email"><i class="fa fa-envelope"></i> Email</label>
@@ -184,20 +187,32 @@
 
               <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
               <input type="text" type="text" name="address" id="address" value="<?php echo e(auth()->user()->address); ?>">
-
-
             </div>
 
-
-
+            <div class="form-group">
+              <label for="date">Select Date:</label>
+              <input type="date" id="datepicker" name="date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                        <label for="exampleInputCategoryName" class="form-label">Time Slot</label>
+                        <select name="time" id="exampleInputDescription" class="form-control">
+                            <option value="">Choose Time Slot</option>
+                           
+                            <option value="1">9-12</option>
+                            <option value="2">12-3</option>
+                            <option value="3">6-9</option>
+                          
+                        </select>
+                    </div>
+            
           </div>
-          <label>
-            <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
-          </label>
-          <input type="submit" value="Payment" class="btn">
+
+          <input type="submit" value="Submit">
+
         </form>
       </div>
     </div>
+
     <!-- <div class="col-25">
       <div class="container">
         <h4>Cart <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>4</b></span></h4>
@@ -210,6 +225,7 @@
       </div>
     </div> -->
   </div>
+  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 </body>
 
