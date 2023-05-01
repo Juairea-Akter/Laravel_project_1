@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-       //  CATEGORY SECTION //
+    //  CATEGORY SECTION //
 
     // Category List
     public function cat_list()
@@ -23,9 +23,18 @@ class CategoryController extends Controller
     // Category Add
     public function cat_add(Request $request)
     {
+        $filename = '';
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            if ($file->isValid()) {
+                $filename = date('Ymdhms') . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('profile', $filename);
+            }
+        }
         category::create([
             "name" => $request->name,
             "description" => $request->description,
+            "image" => $filename,
 
         ]);
         return back();
@@ -41,11 +50,20 @@ class CategoryController extends Controller
     // Category Update
     public function cat_update(Request $request, $id)
     {
+        $filename = '';
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            if ($file->isValid()) {
+                $filename = date('Ymdhms') . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('profile', $filename);
+            }
+        }
         $category = category::find($id);
         $category->update(
             [
                 "name" => $request->name,
                 "description" => $request->description,
+                "image" => $filename,
             ]
         );
         return redirect()->route('cat_list')->with('sucess', 'updated');
@@ -75,7 +93,7 @@ class CategoryController extends Controller
 
     // SUB_CATEGORY SECTION //
 
-// Sub Category List
+    // Sub Category List
     public function sub_cat_list()
     {
         $categories = category::all();
@@ -87,10 +105,19 @@ class CategoryController extends Controller
     // Sub Category Add
     public function sub_cat_add(Request $request)
     {
+        $filename = '';
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            if ($file->isValid()) {
+                $filename = date('Ymdhms') . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('profile', $filename);
+            }
+        }
         sub_category::create([
             "name" => $request->name,
             "cat_id" => $request->cat_id,
             "description" => $request->description,
+            "image" => $filename,
 
         ]);
         return back();
@@ -106,11 +133,20 @@ class CategoryController extends Controller
     // Sub Category Update
     public function sub_cat_update(Request $request, $id)
     {
+        $filename = '';
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            if ($file->isValid()) {
+                $filename = date('Ymdhms') . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('profile', $filename);
+            }
+        }
         $sub_category = sub_category::find($id);
         $sub_category->update(
             [
                 "name" => $request->name,
                 "description" => $request->description,
+                "image" => $filename,
             ]
         );
         return redirect()->route('sub_cat_list')->with('sucess', 'updated');

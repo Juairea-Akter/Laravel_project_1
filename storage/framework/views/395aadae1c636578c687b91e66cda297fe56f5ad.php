@@ -13,6 +13,10 @@
         <label for="exampleInputDescription" class="form-label">Description</label>
         <input type="text" class="form-control" name="description" id="exampleInputDescription" placeholder="Enter address" value="<?php echo e($sub_category->description); ?>">
     </div>
+    <div class="mb-3">
+        <label for="exampleInputDescription" class="form-label">Image</label>
+        <input type="file" class="form-control" name="image" id="exampleInputDescription">
+    </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 <?php $__env->stopSection(); ?>

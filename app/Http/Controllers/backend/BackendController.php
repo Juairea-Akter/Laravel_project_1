@@ -135,7 +135,7 @@ class BackendController extends Controller
    //  ADMIN CO-ARTIST LIST
    public function co_artist_list()
    {
-      $co_artists = co_artist::where('makeup_artist_id', auth()->user()->id)->get();
+      $co_artists = co_artist::all();
 
       return view('backend.layout.co_artist.co_artist_list', compact('co_artists'));
    }

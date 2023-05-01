@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('cat_id');
             $table->string('description');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

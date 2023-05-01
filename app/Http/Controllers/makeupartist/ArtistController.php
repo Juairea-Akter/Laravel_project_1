@@ -139,6 +139,14 @@ class ArtistController extends Controller
     }
     public function makeup_artist_co_artist_list_update(Request $request, $id)
     {
+        $filename = '';
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            if ($file->isValid()) {
+                $filename = date('Ymdhms') . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('profile', $filename);
+            }
+        }
         $co_artist = co_artist::find($id);
         $co_artist->update(
 
@@ -147,6 +155,7 @@ class ArtistController extends Controller
                 "makeup_artist_id" => auth()->user()->id,
                 "email" => $request->email,
                 'phone' => $request->phone,
+                "image" => $filename,
             ]
         );
         return redirect()->route('makeup_artist_co_artist_list')->with('sucess', 'updated');

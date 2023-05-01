@@ -15,7 +15,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="{{route('sub_cat_add')}}" method="post">
+                <form action="{{route('sub_cat_add')}}" method="post" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-3">
@@ -37,6 +37,10 @@
                         <label for="exampleInputDescription" class="form-label">Description</label>
                         <input type="text" class="form-control" name="description" id="exampleInputDescription">
                     </div>
+                    <div class="mb-3">
+                        <label for="exampleInputDescription" class="form-label">Image</label>
+                        <input type="file" class="form-control" name="image" id="exampleInputDescription">
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -54,6 +58,7 @@
             <th scope="col">Name</th>
             <th scope="col">Category Name</th>
             <th scope="col">Description</th>
+            <th scope="col">Image</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -65,6 +70,12 @@
             <td>{{$sub_category ->name}}</td>
             <td>{{$sub_category->category->name}}</td>
             <td>{{$sub_category ->description}}</td>
+            <td>@if($sub_category->image == null)
+                <img src="{{asset('/uploads/profile/dummy.jpg')}}" height="50px" width="50px">
+                @else
+                <img src="{{asset('/uploads/profile/'.$sub_category->image)}}" height="50px" width="50px">
+                @endif
+            </td>
 
             <td>
                 <a class="btn btn" href="{{route('sub_cat_edit',$sub_category->id)}}" role="button"><i class="fa-solid fa-pen-to-square"></i></a>

@@ -15,7 +15,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="<?php echo e(route('cat_add')); ?>" method="post">
+                <form action="<?php echo e(route('cat_add')); ?>" method="post" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
                     <div class="mb-3">
                         <label for="exampleInputCategoryName" class="form-label">Category Name</label>
@@ -25,6 +25,10 @@
                     <div class="mb-3">
                         <label for="exampleInputDescription" class="form-label">Description</label>
                         <input type="text" class="form-control" name="description" id="exampleInputDescription">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputDescription" class="form-label">Image</label>
+                        <input type="file" class="form-control" name="image" id="exampleInputDescription">
                     </div>
             </div>
             <div class="modal-footer">
@@ -42,6 +46,7 @@
             <th scope="col">Serial</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
+            <th scope="col">Image</th>
             <th scope="col">Action</th>
         </tr>
     </thead>
@@ -51,6 +56,12 @@
             <td><?php echo e($key+1); ?></td>
             <td><?php echo e($category ->name); ?></td>
             <td><?php echo e($category ->description); ?></td>
+            <td><?php if($category->image == null): ?>
+                <img src="<?php echo e(asset('/uploads/profile/dummy.jpg')); ?>" height="50px" width="50px">
+                <?php else: ?>
+                <img src="<?php echo e(asset('/uploads/profile/'.$category->image)); ?>" height="50px" width="50px">
+                <?php endif; ?>
+            </td>
             <td>
                 <a class="btn btn" href="<?php echo e(route('cat_edit',$category->id)); ?>" role="button"><i class="fa-solid fa-pen-to-square"></i></a>
                 <!-- Button trigger modal -->
