@@ -18,4 +18,12 @@ class sub_order extends Model
     {
         return $this->belongsTo(packages::class, 'package_id', 'id');
     }
+    public function customer()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+    public function payment()
+    {
+        return $this->hasOne(payment::class, 'order_id', 'order_id');
+    }
 }

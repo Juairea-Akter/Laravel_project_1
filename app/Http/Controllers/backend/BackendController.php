@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\File;
 
 class BackendController extends Controller
 {
+
+   // ADMIN LOGIN
    public function login(Request $request)
    {
       $user = $request->validate([
@@ -57,29 +59,13 @@ class BackendController extends Controller
    //    return view('backend.layout.dashboard', compact("totalOrderPrice"));
    // }
 
-   // ORDER
+
+
+   // ORDER LIST ADMIN PANEL
    public function order()
    {
       $orders = order::all();
       $sub_orders = sub_order::all();
-      echo "Order table";
-      // foreach ($orders as $key => $order) {
-
-      //    // dd($orders);
-      //    foreach ($sub_orders as $key1 => $sub_order) {
-      //       if ($order->id == $sub_order->order_id) {
-
-      //          $pak_id = sub_order::where('order_id', $order->id)->first();
-      //          $pak_id1 = $pak_id->package_id;
-      //          $pak = packages::where('id', $pak_id1)->first();
-      //          $pak_id2 = $pak->makeup_artist_id;
-      //          // dd($pak_id2);
-      //          $name = User::where('id', $pak_id2)->first();
-      //          // dd($name);
-
-      //       }
-      //    }
-      // }
       return view('backend.layout.orders.order', compact('orders', 'sub_orders'));
    }
 
@@ -96,11 +82,15 @@ class BackendController extends Controller
       $users = User::where('role_id', 2)->get();
       return view('backend.layout.makeupartist.makeupartist_list', compact('users'));
    }
+
+   // MAKEUP ARTIST EDIT
    public function makeupartist_list_edit($id)
    {
       $user = User::find($id);
       return view('backend.layout.makeupartist.makeupartist_list_edit', compact('user'));
    }
+
+   // MAKEUP ARTIST UPDATE
    public function makeupartist_list_update(Request $request, $id)
    {
 
@@ -119,13 +109,15 @@ class BackendController extends Controller
          'name' => $request->name,
          'email' => $request->email,
          'phone' => $request->phone,
-         'image' => $filename,
          'address' => $request->address,
          'status' => $request->status,
       ]);
 
       return redirect()->route('makeupartist_list');
    }
+
+
+   // MAKEUP ARTIST DELETE
    public function makeupartist_list_delete($id)
    {
       $user = User::find($id);
@@ -140,9 +132,6 @@ class BackendController extends Controller
 
 
 
-
-
-
    //  ADMIN CO-ARTIST LIST
    public function co_artist_list()
    {
@@ -153,18 +142,21 @@ class BackendController extends Controller
 
 
 
-
-   // CUSTOMER
+   // CUSTOMER LIST
    public function customer_list()
    {
       $users = User::where('role_id', 3)->get();
       return view('backend.layout.customer.customer_list', compact('users'));
    }
+
+   // Customer List Edit
    public function customer_list_edit($id)
    {
       $user = User::find($id);
       return view('backend.layout.customer.customer_list_edit', compact('user'));
    }
+
+   // Customer List Update
    public function customer_list_update(Request $request, $id)
    {
       $user = User::find($id)->update([
@@ -175,6 +167,8 @@ class BackendController extends Controller
       ]);
       return redirect()->route('customer_list');
    }
+
+   // Customer List Delete
    public function customer_list_delete($id)
    {
       $user = User::find($id);
@@ -190,7 +184,7 @@ class BackendController extends Controller
 
 
 
-   // SHOW PACKAGES LIST
+   // SHOW PACKAGE LIST IN ADMIN PANEL
    public function package_list()
    {
 
@@ -198,9 +192,9 @@ class BackendController extends Controller
       $sub_categories = sub_category::all();
       $packages = packages::all();
 
-
       return view('backend.layout.packages.package_list', compact('categories', 'sub_categories', 'packages'));
    }
+
 
    // PAYMENT LIST
    public function payment_list()
@@ -208,7 +202,8 @@ class BackendController extends Controller
       $payments = payment::all();
       return view('backend.layout.payment.payment_list', compact('payments'));
    }
-   // 
+
+   // PAYMENT LIST UPDATE (Comfirm By Admin)
    public function payment_list_update($id)
    {
       $payment = payment::find($id);

@@ -22,7 +22,7 @@ class adminSeeder extends Seeder
             'address' => 'Dhaka',
             'phone' => '01789',
             'role_id' => 1,
-            'status' => 'pending',
+            'status' => 'confirm',
             'password' => Hash::make('123'),
         ]);
     }

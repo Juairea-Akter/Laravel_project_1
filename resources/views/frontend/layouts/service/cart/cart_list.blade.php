@@ -37,10 +37,6 @@
       <td colspan="2">{{Cart::subtotal()}}</td>
 
     </tr>
-    <td colspan="4" class="text-end">Total with tax(21%) = </td>
-    <td colspan="2">{{Cart::total()}}</td>
-
-    </tr>
   </tfoot>
 </table>
 <div class="text-center my-5">

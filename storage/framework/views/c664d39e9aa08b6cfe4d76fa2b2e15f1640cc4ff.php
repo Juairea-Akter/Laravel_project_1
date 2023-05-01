@@ -12,6 +12,5 @@
     <h1>World's Biggest Makeup Artist Platform</h1>
     <p>You can find here the varity of makeup services from the best makeup artists. 
       <br> Our makeup asrtists are very much passionate about their work and they make you more beautiful with their creative touch.</p>
-   
   </div>
 </section><?php /**PATH E:\Samanta\Laravel\Makeup_Artist\resources\views/frontend/include/header.blade.php ENDPATH**/ ?>

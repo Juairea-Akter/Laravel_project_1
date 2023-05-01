@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
+            $table->string('invoiceId');
             $table->string('name');
             $table->bigInteger('user_id')->nullable();
+            $table->bigInteger('order_id')->nullable();
             $table->string('address');
             $table->string('email');
             $table->string('phone');
@@ -24,7 +26,7 @@ return new class extends Migration
             $table->string('transaction_amount');
             $table->string('package_id');
             $table->string('makeup_artist_id');
-            $table->string('status'); 
+            $table->string('status');
             $table->string('date');
             $table->timestamps();
         });

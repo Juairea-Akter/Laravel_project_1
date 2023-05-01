@@ -17,6 +17,10 @@ use Illuminate\Support\Facades\Hash;
 
 class FrontendController extends Controller
 {
+
+   // FRONTEND SECTION //
+
+   // HOME PAGE
    public function index()
    {
       $services = category::all();
@@ -51,12 +55,13 @@ class FrontendController extends Controller
    }
 
 
-   // VIEW MORE ABOUT ARTIST
+   // CLICK VIEW MORE ABOUT ARTIST (Show Packages)
    public function view_more($artistId)
    {
       $packages = packages::where('makeup_artist_id', $artistId)->get();
       return view('frontend.layouts.service.view_more_about_artist', compact('packages'));
    }
+
 
    // ADD TO CART
 
@@ -79,20 +84,26 @@ class FrontendController extends Controller
       return redirect()->back();
    }
 
+   // SHOW CART LIST
    public function cart_list()
    {
       $carts = Cart::content();
       return view('frontend.layouts.service.cart.cart_list', compact('carts'));
    }
+
+   // CART CHECKOUT
    public function cart_checkout()
    {
       $carts = Cart::content();
+      // dd(auth()->user());
       if (!auth()->user()) {
          return redirect()->route("customer_login");
       }
 
       return view('frontend.layouts.service.cart.cart_checkout', compact('carts'));
    }
+
+   // CART REMOVE
    public function destroy($rowId)
    {
       Cart::remove($rowId);
@@ -111,6 +122,7 @@ class FrontendController extends Controller
       ]);
 
       $pak = packages::where('id', $id)->first();
+      $artist_id = $pak->makeup_artist_id;
       $pak2 = $pak->id;
       $pak1 = $pak->package_price;
 
@@ -121,6 +133,7 @@ class FrontendController extends Controller
             'quantity' => $qty,
             'sub_total' => $subtotal,
             'user_id' => auth()->user()->id,
+            'makeup_artist_id' => $artist_id,
             'time' => $request->time,
             'date' => $request->date,
             'price' => $pak1,
@@ -129,9 +142,10 @@ class FrontendController extends Controller
 
       $time = $request->time;
       $date = $request->date;
+      $orderId = $order->id;
       //dd($time,$date);
-
-      return redirect()->route('payment', compact('time', 'date', 'pak2'));
+      Cart::destroy();
+      return redirect()->route('payment', compact('time', 'date', 'pak2', 'orderId'));
    }
 
    // PLACE ORDER
@@ -173,25 +187,29 @@ class FrontendController extends Controller
 
 
    // PAYMENT
-   public function payment($time, $date, $pak2)
+   public function payment($time, $date, $pak2, $orderId)
    {
       $value = sub_order::where('time', $time)->where('date', $date)->where('user_id', auth()->user()->id)->where('package_id', $pak2)->first();
 
       //dd($value);
       //dd($time,$date);
-      return view('frontend.layouts.service.place_order.payment', compact('value', 'pak2'));
+      return view('frontend.layouts.service.place_order.payment', compact('value', 'pak2', 'orderId'));
    }
-   public function payment_submit(Request $request, $pak2)
+   public function payment_submit(Request $request, $pak2, $orderId)
    {
 
       $makeup = packages::where('id', $pak2)->first();
       $makeup1 = $makeup->makeup_artist_id;
       $makeup2 = $makeup->id;
 
+      // generate unique invoice number 
+      $invoiceId = uniqid();
 
       payment::create([
          'name' => $request->name,
+         'invoiceId' => $invoiceId,
          'user_id' => auth()->user()->id,
+         'order_id' => $orderId,
          'address' => $request->address,
          'email' => $request->email,
          'phone' => auth()->user()->phone,
@@ -202,7 +220,7 @@ class FrontendController extends Controller
          'status' => 1,
          'date' => $request->date,
       ]);
-      return redirect()->back();
+      return redirect()->route('index');
    }
 
 
@@ -255,13 +273,22 @@ class FrontendController extends Controller
          }
       }
 
+      $docFileName = '';
+      if ($request->hasFile('doc')) {
+         $file = $request->file('doc');
+         if ($file->isValid()) {
+            $docFileName = date('Ymdhms') . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('profile', $docFileName);
+         }
+      }
+
       User::create([
          'name' => $request->name,
          'email' => $request->email,
          'phone' => $request->phone,
          'role_id' => 2,
          'address' => $request->address,
-         'doc' => $request->doc,
+         'doc' => $docFileName,
          'image' => $filename,
          'password' => Hash::make($request->password),
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('order_id')->nullable();
             $table->bigInteger('user_id')->nullable();
+            $table->string('makeup_artist_id')->nullable();
             $table->string('package_id')->nullable();
             $table->string('price')->nullable();
             $table->string('quantity')->nullable();

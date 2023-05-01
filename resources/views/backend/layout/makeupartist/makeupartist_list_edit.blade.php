@@ -22,7 +22,7 @@
     <input type="tel" name="phone" class="form-control" id="inputphone" placeholder="Phone" value="{{$user->phone}}">
   </div>
   <br>
-  <div class="form-group">
+  <!-- <div class="form-group">
     @if($user -> image == null)
     <img src="{{asset('/uploads/profile/dummy.jpg')}}" height="50px" width="50px">
     @else
@@ -30,7 +30,7 @@
     @endif
     <label for="inputimage">Image</label>
     <input type="file" name="image" class="form-control" id="inputimage" placeholder="image">
-  </div>
+  </div> -->
   <div class="input-group my-3">
     <label class="label">Status</label>
     <select name="status">

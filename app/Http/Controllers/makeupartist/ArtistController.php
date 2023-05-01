@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\co_artist;
+use App\Models\order;
 use App\Models\packages;
 use App\Models\sub_category;
+use App\Models\sub_order;
 use Illuminate\Support\Facades\Auth;
 
 class ArtistController extends Controller
@@ -21,7 +23,7 @@ class ArtistController extends Controller
 
         if (Auth::attempt($user)) {
 
-            if (Auth::user()->role_id == 2) {
+            if (Auth::user()->role_id == 2 && Auth::user()->status == "approve") {
                 return redirect()->route('makeup_artist_dashboard');
             } else if (Auth::user()->role_id == 3) {
 
@@ -110,10 +112,20 @@ class ArtistController extends Controller
     public function makeup_artist_co_artist_add(Request $request)
     {
         //   dd($request->all());
+        $filename = '';
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            if ($file->isValid()) {
+                $filename = date('Ymdhms') . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
+                $file->storeAs('profile', $filename);
+            }
+        }
+        // dd($filename);
         co_artist::create([
             "name" => $request->name,
             "makeup_artist_id" => auth()->user()->id,
             "email" => $request->email,
+            "image" => $filename,
             'phone' => $request->phone,
 
         ]);
@@ -171,7 +183,11 @@ class ArtistController extends Controller
     // APPOINTMENT LIST
     public function makeup_artist_appointment_list()
     {
-        return view('frontend.makeup_artist.makeup_artist_layout.makeup_artist_appointment_list');
+        $orders = sub_order::where('makeup_artist_id', auth()->user()->id)->get();
+        // foreach ($orders as $order) {
+        //     echo $order->customer->name ?? "No Name";
+        // }
+        return view('frontend.makeup_artist.makeup_artist_layout.makeup_artist_appointment_list', compact('orders'));
     }
 
 
@@ -188,5 +204,11 @@ class ArtistController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    // MAKEUPARTIST PROFILE
+    public function makeup_artist_profile()
+    {
+        return view('frontend.makeup_artist.makeup_artist_layout.artist_profile.edit_artist_profile');
     }
 }

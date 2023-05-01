@@ -5,6 +5,7 @@ use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\backend\BackendController;
 use App\Http\Controllers\category\CategoryController;
 use App\Http\Controllers\makeupartist\ArtistController;
+use App\Http\Controllers\PdfController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -131,8 +132,8 @@ Route::post('place/order', [FrontendController::class, 'place_order'])->name('pl
 
 // PAYMENT
 Route::get('customer/payment/details', [FrontendController::class, 'customer_payment_details'])->name('customer_payment_details');
-Route::get('/payment/{time}/{date}/{pak2}', [FrontendController::class, 'payment'])->name('payment');
-Route::post('/payment/{pak2}', [FrontendController::class, 'payment_submit'])->name('payment_submit');
+Route::get('/payment/{time}/{date}/{pak2}/{orderId}', [FrontendController::class, 'payment'])->name('payment');
+Route::post('/payment/{pak2}/{orderId}', [FrontendController::class, 'payment_submit'])->name('payment_submit');
 Route::get('/sub_order/delete/{value}', [FrontendController::class, 'sub_order_delete'])->name('sub_order_delete');
 
 // SUBMIT PAYMENT Update
@@ -167,4 +168,8 @@ Route::get('makeup/artist/co_artist/list/delete/{id}', [ArtistController::class,
 Route::get('appointment/list', [ArtistController::class, 'makeup_artist_appointment_list'])->name('makeup_artist_appointment_list');
 
 // PROFILE EDIT
-Route::get('makeup/artist/profile/edit', [ArtistController::class, 'makeup_artist_profile_edit'])->name('makeup_artist_profile_edit');
+Route::get('makeup/artist/profile/edit', [ArtistController::class, 'makeup_artist_profile'])->name('makeup_artist_profile');
+
+// invoice generator
+Route::get('/generate-invoice/{id}', [PdfController::class, 'generate_invoice']);
+// Route::get('/download-invoice', [PdfController::class, 'download_invoice']);

@@ -15,7 +15,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="{{route('makeup_artist_co_artist_add')}}" method="post">
+                <form action="{{route('makeup_artist_co_artist_add')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="exampleInputDescription" class="form-label">Co-Artist Name</label>
@@ -35,12 +35,12 @@
                         <label for="exampleInputDescription" class="form-label">Image</label>
                         <input type="file" class="form-control" name="image" id="exampleInputDescription">
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </div>
+                </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Create</button>
-            </div>
-            </form>
         </div>
     </div>
 </div>

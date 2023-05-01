@@ -35,10 +35,6 @@
       <td>{{Cart::subtotal()}}</td>
 
     </tr>
-    <td colspan="4">Total with tax(21%)</td>
-    <td>{{Cart::total()}}</td>
-
-    </tr>
   </tfoot>
 </table>
 
@@ -159,21 +155,19 @@
         margin-bottom: 20px;
       }
     }
-
-    
   </style>
 </head>
 
 <body>
-@foreach($carts as $data)
+  @foreach($carts as $data)
 
 
 
   <div class="row">
     <div class="col-75">
       <div class="container">
-        <form action="{{route('submit',[$data->id,$data->subtotal,$data->qty])}} "method="post">
-@csrf
+        <form action="{{route('submit',[$data->id,$data->subtotal,$data->qty])}} " method="post">
+          @csrf
           <div class="row">
             <div class="col-50">
               <h3>Cart Details</h3>
@@ -194,17 +188,17 @@
               <input type="date" id="datepicker" name="date" class="form-control" required>
             </div>
             <div class="mb-3">
-                        <label for="exampleInputCategoryName" class="form-label">Time Slot</label>
-                        <select name="time" id="exampleInputDescription" class="form-control">
-                            <option value="">Choose Time Slot</option>
-                           
-                            <option value="1">9-12</option>
-                            <option value="2">12-3</option>
-                            <option value="3">6-9</option>
-                          
-                        </select>
-                    </div>
-            
+              <label for="exampleInputCategoryName" class="form-label">Time Slot</label>
+              <select name="time" id="exampleInputDescription" class="form-control">
+                <option value="">Choose Time Slot</option>
+
+                <option value="8:30AM-11:30AM">8:30AM-11:30AM</option>
+                <option value="12:30PM-3:30PM">12:30PM-3:30PM</option>
+                <option value="4:30PM-7:30PM">4:30PM-7:30PM</option>
+
+              </select>
+            </div>
+
           </div>
 
           <input type="submit" value="Submit">

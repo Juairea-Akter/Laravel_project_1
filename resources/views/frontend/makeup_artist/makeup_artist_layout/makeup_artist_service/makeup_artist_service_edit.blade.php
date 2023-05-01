@@ -6,7 +6,7 @@
     @method('PUT')
     <div class="mb-3">
         <label for="exampleInputCategoryName" class="form-label">Category Name</label>
-        <select name="cat_id" id="exampleInputDescription" class="form-control" >
+        <select name="cat_id" id="exampleInputDescription" class="form-control">
             <option value="">Choose...</option>
             @foreach($categories as $category)
             <option @if($package->cat_id == $category->id)selected @endif value="{{$category->id}}">{{$category->name}}</option>
@@ -15,12 +15,10 @@
     </div>
     <div class="mb-3">
         <label for="exampleInputCategoryName" class="form-label">Sub Category Name</label>
-        <select name="sub_cat_id" id="exampleInputDescription" class="form-control" >
-            <option >Choose...</option>
+        <select name="sub_cat_id" id="exampleInputDescription" class="form-control">
+            <option>Choose...</option>
             @foreach($sub_categories as $sub_category)
             <option @if($package->sub_cat_id == $sub_category->id)selected @endif value="{{$sub_category->id}}">{{$sub_category->name}}</option>
-
-            
             @endforeach
         </select>
     </div>
