@@ -28,10 +28,10 @@
       <img class="center" style="display: block;
                     margin-left: auto;
                     margin-right: auto;
-                    width: 50%; height:150px; width:150px;
+                    height:150px; width:150px;
                     border: 2px solid black;
                     font-weight: bold;
-        padding: 10px;" src="<?php echo e(asset('/uploads/payment/bkash.jpg')); ?>" /><br>
+        padding: 10px;" src="<?php echo e(asset('/images/bkash_qr.jpg')); ?>" /><br>
 
       <label for="transaction-number">Transaction Number:</label>
       <input type="text" id="transaction-number" name="transaction_number" required><br>

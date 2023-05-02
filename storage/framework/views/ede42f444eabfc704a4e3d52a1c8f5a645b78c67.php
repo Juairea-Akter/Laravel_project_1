@@ -6,7 +6,7 @@
     <?php echo method_field('PUT'); ?>
     <div class="mb-3">
         <label for="exampleInputCategoryName" class="form-label">Category Name</label>
-        <select name="cat_id" id="exampleInputDescription" class="form-control" >
+        <select name="cat_id" id="exampleInputDescription" class="form-control">
             <option value="">Choose...</option>
             <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <option <?php if($package->cat_id == $category->id): ?>selected <?php endif; ?> value="<?php echo e($category->id); ?>"><?php echo e($category->name); ?></option>
@@ -15,12 +15,10 @@
     </div>
     <div class="mb-3">
         <label for="exampleInputCategoryName" class="form-label">Sub Category Name</label>
-        <select name="sub_cat_id" id="exampleInputDescription" class="form-control" >
-            <option >Choose...</option>
+        <select name="sub_cat_id" id="exampleInputDescription" class="form-control">
+            <option>Choose...</option>
             <?php $__currentLoopData = $sub_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sub_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <option <?php if($package->sub_cat_id == $sub_category->id): ?>selected <?php endif; ?> value="<?php echo e($sub_category->id); ?>"><?php echo e($sub_category->name); ?></option>
-
-            
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </select>
     </div>

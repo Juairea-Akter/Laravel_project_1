@@ -4,13 +4,17 @@
 <section class="course">
     <h1>Available packages</h1>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-    <div class="row">
+    <div class="row justify-content-start">
         <?php $__currentLoopData = $packages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $package): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <div class="course-col">
-            <h3><?php echo e($package->package_name); ?></h3>
-            <p><?php echo e($package->description); ?></p>
-            <p><?php echo e($package->package_price); ?> TK</p>
-            <a href="<?php echo e(route('add_cart',$package->id)); ?>" class="btn btn-primary">Add to cart</a>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo e($package->package_name); ?></h5>
+                    <p class="card-text"><?php echo e($package->description); ?></p>
+                    <p><?php echo e($package->package_price); ?> TK</p>
+                    <a href="<?php echo e(route('add_cart',$package->id)); ?>" class="btn btn-primary">Add to cart</a>
+                </div>
+            </div>
         </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>

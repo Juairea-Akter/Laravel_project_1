@@ -4,12 +4,17 @@
 <section class="course">
     <h1>Choose Your Makeup sub Category</h1>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-    <div class="row">
+    <div class="row justify-content-start">
         <?php $__currentLoopData = $sub_categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $sub_category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-        <div class="course-col">
-            <h3><?php echo e($sub_category->name); ?></h3>
-            <p><?php echo e($sub_category->description); ?></p>
-            <a href="<?php echo e(route('choose_artist',$sub_category->id)); ?>" class="btn btn-primary">Choose Artist</a>
+        <div class="col-4">
+            <div class="card">
+                <img src="<?php echo e(asset('/uploads/profile/'.$sub_category->image)); ?>" class="card-img-top" alt="<?php echo e($sub_category->image); ?>" style="max-height: 300px;object-fit: cover; object-position: top;">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo e($sub_category->name); ?></h5>
+                    <p class="card-text"><?php echo e($sub_category->description); ?></p>
+                    <a href="<?php echo e(route('choose_artist',$sub_category->id)); ?>" class="btn btn-primary">Choose Artist</a>
+                </div>
+            </div>
         </div>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>

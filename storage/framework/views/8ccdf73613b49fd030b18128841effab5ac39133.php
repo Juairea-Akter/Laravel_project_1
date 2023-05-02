@@ -21,9 +21,7 @@
     <i class="fa fa-times" onclick="hideMenu()"></i>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/">About</a></li>
         <li><a href="/#serviceSection">Service</a></li>
-        <li><a href="/">Contact</a></li>
 
         <li class="nav-item dropdown text-light">
             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sign up</a>

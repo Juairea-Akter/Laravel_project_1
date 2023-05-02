@@ -4,13 +4,17 @@
 <section class="course">
     <h1>Available packages</h1>
     <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-    <div class="row">
+    <div class="row justify-content-start">
         @foreach($packages as $package)
-        <div class="course-col">
-            <h3>{{$package->package_name}}</h3>
-            <p>{{$package->description}}</p>
-            <p>{{$package->package_price}} TK</p>
-            <a href="{{route('add_cart',$package->id)}}" class="btn btn-primary">Add to cart</a>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{$package->package_name}}</h5>
+                    <p class="card-text">{{$package->description}}</p>
+                    <p>{{$package->package_price}} TK</p>
+                    <a href="{{route('add_cart',$package->id)}}" class="btn btn-primary">Add to cart</a>
+                </div>
+            </div>
         </div>
         @endforeach
     </div>
