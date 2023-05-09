@@ -173,10 +173,11 @@
             font-size: 14px;
             font-weight: 400;
             line-height: 18px;
-            color: #666;
+            color: red;
             margin: 0;
             padding: 0;
             transition: all .3s;
+            text-align: right;
         }
 
         .details-list .list strong {
@@ -318,10 +319,11 @@
                 <div class="invoice-details-flex">
                     <div class="invoice-single-details">
                         <h4 class="invoice-details-title"><?php echo e(__('Bill To:')); ?></h4>
-                        <ul class="details-list">
+                        <ul class="details-list ">
                             <li class="list"><?php echo e($payment->name); ?> </li>
                             <li class="list"> <a mailto="<?php echo e($payment->name); ?>"><?php echo e($payment->email); ?> </a> </li>
                             <li class="list"> <a callto="<?php echo e($payment->phone); ?>"><?php echo e($payment->phone); ?></a> </li>
+                            <li class="list"> <a callto="<?php echo e($payment->phone); ?>"><?php echo e($payment->created_at); ?></a> </li>
                         </ul>
                     </div>
                     <div class="invoice-single-details" style="float:right;margin-top:-120px;">
@@ -358,9 +360,6 @@
                     </tbody>
                 </table>
             </div>
-
-
-
         </div>
     </div>
 

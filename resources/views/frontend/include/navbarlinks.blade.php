@@ -4,9 +4,7 @@
     <i class="fa fa-times" onclick="hideMenu()"></i>
     <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/">About</a></li>
         <li><a href="/#serviceSection">Service</a></li>
-        <li><a href="/">Contact</a></li>
         <li><a href="{{route('customer_payment_details')}}">Payment</a></li>
 
         <li><a class=" " id="" href="{{route('signout')}}" aria-expanded="false">Sign Out</a></li>

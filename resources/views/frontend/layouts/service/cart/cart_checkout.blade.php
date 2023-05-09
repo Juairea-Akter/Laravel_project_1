@@ -33,8 +33,9 @@
     <tr>
       <td colspan="4">Grand total</td>
       <td>{{Cart::subtotal()}}</td>
-
+      
     </tr>
+    
   </tfoot>
 </table>
 
