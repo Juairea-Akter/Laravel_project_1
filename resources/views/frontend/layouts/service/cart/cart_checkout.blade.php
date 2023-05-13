@@ -193,7 +193,12 @@
             </div>
 
           </div>
-
+          @if ($message = Session::get('error'))
+            <div class="alert alert-danger" role="alert">
+                <strong>Error: {{ $message }}</strong>
+                <p class="text-dark m-0 p-0">Please select different time or date and try again. </p>
+            </div>
+          @endif
           <input type="submit" value="Submit">
 
         </form>

@@ -114,6 +114,21 @@ class FrontendController extends Controller
    // SUBMIT (Place order)
    public function submit(Request $request, $id, $subtotal, $qty)
    {
+      $time = $request->time;
+      $date = $request->date;
+
+      $pak = packages::where('id', $id)->first();
+      $artist_id = $pak->makeup_artist_id;
+      $packageId = $pak->id;
+      $packagePrice = $pak->package_price;
+      // find sub order by artist id, date and time
+      $findSubOrder = sub_order::where('makeup_artist_id', $artist_id)->where('date', $date)->where('time', $time)->first();
+      // return back if time or date is not available
+
+      if (!empty($findSubOrder)) {
+         return redirect()->back()->with('error', 'Your selected time or date is not available');
+      }
+      // create order
       $order = order::create([
          'user_id' => auth()->user()->id,
          'address' => auth()->user()->address,
@@ -122,11 +137,7 @@ class FrontendController extends Controller
          'total' => floatval(str_replace(',', '', $subtotal))
       ]);
 
-      $pak = packages::where('id', $id)->first();
-      $artist_id = $pak->makeup_artist_id;
-      $packageId = $pak->id;
-      $packagePrice = $pak->package_price;
-
+      // create sub order
       sub_order::create(
          [
             'order_id' => $order->id,
@@ -141,8 +152,6 @@ class FrontendController extends Controller
          ]
       );
 
-      $time = $request->time;
-      $date = $request->date;
       $orderId = $order->id;
       //dd($time,$date);
       Cart::destroy();
