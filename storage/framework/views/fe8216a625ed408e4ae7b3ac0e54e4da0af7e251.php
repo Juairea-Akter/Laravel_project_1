@@ -13,16 +13,16 @@
 </html>
 
 <body>
-  <form action="{{route('payment_submit',[$packageId,$orderId])}}" method="post">
-    @csrf
+  <form action="<?php echo e(route('payment_submit',[$packageId,$orderId])); ?>" method="post">
+    <?php echo csrf_field(); ?>
     <fieldset>
 
       <legend>Payment Information</legend>
       <label for="name">Name:</label>
-      <input type="text" id="name" name="name" required value="{{auth()->user()->name}}"><br>
+      <input type="text" id="name" name="name" required value="<?php echo e(auth()->user()->name); ?>"><br>
 
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" required value="{{auth()->user()->email}}"><br>
+      <input type="email" id="email" name="email" required value="<?php echo e(auth()->user()->email); ?>"><br>
 
       <label for="transaction-number" style="text-align: center;">QR Bar Code</label>
       <img class="center" style="display: block;
@@ -31,7 +31,7 @@
                     height:150px; width:150px;
                     border: 2px solid black;
                     font-weight: bold;
-        padding: 10px;" src="{{ asset('/images/bkash_qr.jpg')}}" /><br>
+        padding: 10px;" src="<?php echo e(asset('/images/bkash_qr.jpg')); ?>" /><br>
 
       <label for="transaction-number">Transaction Number:</label>
       <input type="text" id="transaction-number" name="transaction_number" required><br>
@@ -39,25 +39,25 @@
       <label for="transaction-amount">Transaction Amount:</label>
       <input type="text" id="transaction-amount" name="transaction_amount" required value=""><br>
 
-      @php
+      <?php
       $today = \Carbon\Carbon::now();
       $formattedDate = $today->format('Y-m-d');
-      @endphp
+      ?>
       <label for="date">Date:</label>
-      <input type="date" id="text" name="date" required value="{{$formattedDate}}"><br>
+      <input type="date" id="text" name="date" required value="<?php echo e($formattedDate); ?>"><br>
 
 
 
       <label for="city">City:</label>
-      <input type="text" id="address" name="address" required required value="{{auth()->user()->address}}"><br>
+      <input type="text" id="address" name="address" required required value="<?php echo e(auth()->user()->address); ?>"><br>
 
       <label for="phone-number">Phone Number:</label>
-      <input type="tel" id="phone-number" name="phone" required value="{{auth()->user()->phone}}"><br>
+      <input type="tel" id="phone-number" name="phone" required value="<?php echo e(auth()->user()->phone); ?>"><br>
 
       <input type="submit" value="Submit Payment">
-      <a class="btn btn-danger" href="{{route('sub_order_delete',$value)}}" role="button">Cancel</a>
+      <a class="btn btn-danger" href="<?php echo e(route('sub_order_delete',$value)); ?>" role="button">Cancel</a>
     </fieldset>
   </form>
 </body>
 
-</html>
+</html><?php /**PATH D:\PHP\Laravel_project_1\resources\views/frontend/layouts/service/place_order/payment.blade.php ENDPATH**/ ?>

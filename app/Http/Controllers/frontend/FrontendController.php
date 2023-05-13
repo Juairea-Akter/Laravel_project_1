@@ -67,6 +67,7 @@ class FrontendController extends Controller
 
    public function add_cart($id)
    {
+      // Cart::setGlobalTax(10);
       $package = packages::where('id', $id)->first();
       $carts = Cart::content();
 
@@ -110,7 +111,7 @@ class FrontendController extends Controller
       return redirect()->back();
    }
 
-   // SUBMIT
+   // SUBMIT (Place order)
    public function submit(Request $request, $id, $subtotal, $qty)
    {
       $order = order::create([
@@ -123,8 +124,8 @@ class FrontendController extends Controller
 
       $pak = packages::where('id', $id)->first();
       $artist_id = $pak->makeup_artist_id;
-      $pak2 = $pak->id;
-      $pak1 = $pak->package_price;
+      $packageId = $pak->id;
+      $packagePrice = $pak->package_price;
 
       sub_order::create(
          [
@@ -136,7 +137,7 @@ class FrontendController extends Controller
             'makeup_artist_id' => $artist_id,
             'time' => $request->time,
             'date' => $request->date,
-            'price' => $pak1,
+            'price' => $packagePrice,
          ]
       );
 
@@ -145,7 +146,7 @@ class FrontendController extends Controller
       $orderId = $order->id;
       //dd($time,$date);
       Cart::destroy();
-      return redirect()->route('payment', compact('time', 'date', 'pak2', 'orderId'));
+      return redirect()->route('payment', compact('time', 'date', 'packageId', 'orderId'));
    }
 
    // PLACE ORDER
@@ -187,20 +188,19 @@ class FrontendController extends Controller
 
 
    // PAYMENT
-   public function payment($time, $date, $pak2, $orderId)
+   public function payment($time, $date, $packageId, $orderId)
    {
-      $value = sub_order::where('time', $time)->where('date', $date)->where('user_id', auth()->user()->id)->where('package_id', $pak2)->first();
+      $value = sub_order::where('time', $time)->where('date', $date)->where('user_id', auth()->user()->id)->where('package_id', $packageId)->first();
 
       //dd($value);
       //dd($time,$date);
-      return view('frontend.layouts.service.place_order.payment', compact('value', 'pak2', 'orderId'));
+      return view('frontend.layouts.service.place_order.payment', compact('value', 'packageId', 'orderId'));
    }
-   public function payment_submit(Request $request, $pak2, $orderId)
+   public function payment_submit(Request $request, $packageId, $orderId)
    {
 
-      $makeup = packages::where('id', $pak2)->first();
-      $makeup1 = $makeup->makeup_artist_id;
-      $makeup2 = $makeup->id;
+      $package = packages::where('id', $packageId)->first();
+      $makeupArtistId = $package->makeup_artist_id;
 
       // generate unique invoice number 
       $invoiceId = uniqid();
@@ -215,8 +215,8 @@ class FrontendController extends Controller
          'phone' => auth()->user()->phone,
          'transaction_number' => $request->transaction_number,
          'transaction_amount' => $request->transaction_amount,
-         'package_id' => $makeup2,
-         'makeup_artist_id' => $makeup1,
+         'package_id' => $packageId,
+         'makeup_artist_id' => $makeupArtistId,
          'status' => 1,
          'date' => $request->date,
       ]);

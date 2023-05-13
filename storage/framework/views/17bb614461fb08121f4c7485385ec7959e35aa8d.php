@@ -1,6 +1,6 @@
-@extends('frontend.master')
-@section('content')
-@include('frontend.include.navbar')
+
+<?php $__env->startSection('content'); ?>
+<?php echo $__env->make('frontend.include.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <table class="table">
   <thead>
     <tr>
@@ -11,34 +11,34 @@
     </tr>
   </thead>
   <tbody>
-    @php
+    <?php
     $key = 0;
-    @endphp
-    @foreach($carts as $data)
+    ?>
+    <?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <tr>
-      <th scope="row">{{$key+1}}</th>
-      <td>{{$data->name}}</td>
-      <td>{{$data->qty}}</td>
-      <td>{{$data->price}} Tk</td>
+      <th scope="row"><?php echo e($key+1); ?></th>
+      <td><?php echo e($data->name); ?></td>
+      <td><?php echo e($data->qty); ?></td>
+      <td><?php echo e($data->price); ?> Tk</td>
     </tr>
-    @php
+    <?php
     $key++;
-    @endphp
-    @endforeach
+    ?>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
   </tbody>
   <tfoot>
     <tr>
       <td colspan="3" class="text-end">Subtotal </td>
-      <td colspan="1">{{Cart::subtotal()}} Tk</td>
+      <td colspan="1"><?php echo e(Cart::subtotal()); ?> Tk</td>
     </tr>
     <tr>
       <td colspan="3" class="text-end">Tax (10%)</td>
-      <td colspan="1">{{Cart::tax()}} Tk</td>
+      <td colspan="1"><?php echo e(Cart::tax()); ?> Tk</td>
 
     </tr>
     <tr>
       <td colspan="3" class="text-end">Total </td>
-      <td colspan="1">{{Cart::total()}} Tk</td>
+      <td colspan="1"><?php echo e(Cart::total()); ?> Tk</td>
     </tr>
   </tfoot>
 </table>
@@ -154,26 +154,26 @@
       }
     }
   </style>
-  @foreach($carts as $data)
+  <?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
   <div class="row">
     <div class="col-75">
       <div class="container">
-        <form action="{{route('submit',[$data->id,$data->total,$data->qty])}} " method="post">
-          @csrf
+        <form action="<?php echo e(route('submit',[$data->id,$data->total,$data->qty])); ?> " method="post">
+          <?php echo csrf_field(); ?>
           <div class="row">
             <div class="col-50">
               <h3>Cart Details</h3>
               <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-              <input type="text" name="name" id="name" value="{{auth()->user()->name}}">
+              <input type="text" name="name" id="name" value="<?php echo e(auth()->user()->name); ?>">
               <label for="email"><i class="fa fa-envelope"></i> Email</label>
-              <input type="text" name="email" id="email" value="{{auth()->user()->email}}">
+              <input type="text" name="email" id="email" value="<?php echo e(auth()->user()->email); ?>">
 
               <label for="phone"><i class="fa fa-envelope"></i> Phone</label>
-              <input type="tel" name="phone" id="phone" value="{{auth()->user()->phone}}">
+              <input type="tel" name="phone" id="phone" value="<?php echo e(auth()->user()->phone); ?>">
 
               <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
-              <input type="text" type="text" name="address" id="address" value="{{auth()->user()->address}}">
+              <input type="text" type="text" name="address" id="address" value="<?php echo e(auth()->user()->address); ?>">
             </div>
 
             <div class="form-group">
@@ -212,6 +212,7 @@
       </div>
     </div> -->
   </div>
-  @endforeach
+  <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('frontend.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\PHP\Laravel_project_1\resources\views/frontend/layouts/service/cart/cart_checkout.blade.php ENDPATH**/ ?>

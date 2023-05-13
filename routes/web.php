@@ -132,8 +132,8 @@ Route::post('place/order', [FrontendController::class, 'place_order'])->name('pl
 
 // PAYMENT
 Route::get('customer/payment/details', [FrontendController::class, 'customer_payment_details'])->name('customer_payment_details');
-Route::get('/payment/{time}/{date}/{pak2}/{orderId}', [FrontendController::class, 'payment'])->name('payment');
-Route::post('/payment/{pak2}/{orderId}', [FrontendController::class, 'payment_submit'])->name('payment_submit');
+Route::get('/payment/{time}/{date}/{packageId}/{orderId}', [FrontendController::class, 'payment'])->name('payment');
+Route::post('/payment/{packageId}/{orderId}', [FrontendController::class, 'payment_submit'])->name('payment_submit');
 Route::get('/sub_order/delete/{value}', [FrontendController::class, 'sub_order_delete'])->name('sub_order_delete');
 
 // SUBMIT PAYMENT Update
