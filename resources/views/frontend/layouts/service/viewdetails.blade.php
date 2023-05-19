@@ -7,7 +7,7 @@
     <div class="row justify-content-start">
         @foreach($sub_categories as $sub_category)
         <div class="col-4">
-            <div class="card">
+            <div class="card mb-4">
                 <img src="{{asset('/uploads/profile/'.$sub_category->image)}}" class="card-img-top" alt="{{$sub_category->image}}" style="max-height: 300px;object-fit: cover; object-position: top;">
                 <div class="card-body">
                     <h5 class="card-title">{{$sub_category->name}}</h5>

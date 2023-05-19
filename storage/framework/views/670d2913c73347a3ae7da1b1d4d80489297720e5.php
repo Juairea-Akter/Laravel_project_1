@@ -13,7 +13,7 @@
 </html>
 
 <body>
-  <form action="<?php echo e(route('payment_submit',[$pak2,$orderId])); ?>" method="post">
+  <form action="<?php echo e(route('payment_submit',[$packageId,$orderId])); ?>" method="post">
     <?php echo csrf_field(); ?>
     <fieldset>
 

@@ -8,7 +8,6 @@
       <th scope="col">Package Name</th>
       <th scope="col">Quantity</th>
       <th scope="col">Price</th>
-      <th scope="col">Sub Total</th>
     </tr>
   </thead>
   <tbody>
@@ -20,9 +19,7 @@
       <th scope="row"><?php echo e($key+1); ?></th>
       <td><?php echo e($data->name); ?></td>
       <td><?php echo e($data->qty); ?></td>
-      <td><?php echo e($data->price); ?></td>
-      <td><?php echo e($data->subtotal); ?></td>
-
+      <td><?php echo e($data->price); ?> Tk</td>
     </tr>
     <?php
     $key++;
@@ -31,20 +28,21 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="4">Grand total</td>
-      <td><?php echo e(Cart::subtotal()); ?></td>
+      <td colspan="3" class="text-end">Subtotal </td>
+      <td colspan="1"><?php echo e(Cart::subtotal()); ?> Tk</td>
+    </tr>
+    <tr>
+      <td colspan="3" class="text-end">Tax (10%)</td>
+      <td colspan="1"><?php echo e(Cart::tax()); ?> Tk</td>
 
+    </tr>
+    <tr>
+      <td colspan="3" class="text-end">Total </td>
+      <td colspan="1"><?php echo e(Cart::total()); ?> Tk</td>
     </tr>
   </tfoot>
 </table>
 
-
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     body {
       font-family: Arial;
@@ -156,17 +154,12 @@
       }
     }
   </style>
-</head>
-
-<body>
   <?php $__currentLoopData = $carts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-
 
   <div class="row">
     <div class="col-75">
       <div class="container">
-        <form action="<?php echo e(route('submit',[$data->id,$data->subtotal,$data->qty])); ?> " method="post">
+        <form action="<?php echo e(route('submit',[$data->id,$data->total,$data->qty])); ?> " method="post">
           <?php echo csrf_field(); ?>
           <div class="row">
             <div class="col-50">
@@ -200,7 +193,12 @@
             </div>
 
           </div>
-
+          <?php if($message = Session::get('error')): ?>
+            <div class="alert alert-danger" role="alert">
+                <strong>Error: <?php echo e($message); ?></strong>
+                <p class="text-dark m-0 p-0">Please select different time or date and try again. </p>
+            </div>
+          <?php endif; ?>
           <input type="submit" value="Submit">
 
         </form>
@@ -220,10 +218,6 @@
     </div> -->
   </div>
   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-</body>
-
-</html>
 
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontend.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH E:\Samanta\Laravel\Makeup_Artist\resources\views/frontend/layouts/service/cart/cart_checkout.blade.php ENDPATH**/ ?>

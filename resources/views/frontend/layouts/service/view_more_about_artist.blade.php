@@ -7,7 +7,7 @@
     <div class="row justify-content-start">
         @foreach($packages as $package)
         <div class="col-4">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title">{{$package->package_name}}</h5>
                     <p class="card-text">{{$package->description}}</p>

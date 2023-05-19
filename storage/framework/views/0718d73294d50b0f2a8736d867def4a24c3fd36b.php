@@ -7,7 +7,7 @@
     <div class="row justify-content-start">
         <?php $__currentLoopData = $packages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $package): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
         <div class="col-4">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo e($package->package_name); ?></h5>
                     <p class="card-text"><?php echo e($package->description); ?></p>

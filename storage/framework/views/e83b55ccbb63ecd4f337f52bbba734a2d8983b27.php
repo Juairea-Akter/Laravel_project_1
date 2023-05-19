@@ -23,7 +23,7 @@
       <td><?php echo e($data->name); ?></td>
       <td><?php echo e($data->qty); ?></td>
       <td><?php echo e($data->price); ?></td>
-      <td><?php echo e($data->subtotal); ?></td>
+      <td><?php echo e($data->subtotal); ?> Tk</td>
       <td><a href="<?php echo e(route('destroy',$data->rowId)); ?>" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
     </tr>
     <?php
@@ -33,10 +33,18 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="4" class="text-end">Grand total = </td>
-      <td colspan="2"><?php echo e(Cart::subtotal()); ?></td>
+      <td colspan="4" class="text-end">Subtotal </td>
+      <td colspan="2"><?php echo e(Cart::subtotal()); ?> Tk</td>
 
+    </tr>
+    <tr>
+      <td colspan="4" class="text-end">Tax (10%)</td>
+      <td colspan="2"><?php echo e(Cart::tax()); ?> Tk</td>
 
+    </tr>
+    <tr>
+      <td colspan="4" class="text-end">Total </td>
+      <td colspan="2"><?php echo e(Cart::total()); ?> Tk</td>
     </tr>
   </tfoot>
 </table>

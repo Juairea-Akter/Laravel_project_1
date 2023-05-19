@@ -28,7 +28,7 @@
     </div>
     <div class="mb-3">
         <label for="exampleInputservice" class="form-label">Description</label>
-        <input type="text" class="form-control" name="description" id="exampleInputservice" value="{{$package->description}}">
+        <textarea type="text" class="form-control" name="description" id="exampleInputservice" cols="30" rows="10">{{$package->description}}</textarea>
     </div>
     <div class="mb-3">
         <label for="exampleInputservice" class="form-label">Price</label>
