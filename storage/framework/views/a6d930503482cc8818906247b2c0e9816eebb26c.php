@@ -173,11 +173,10 @@
             font-size: 14px;
             font-weight: 400;
             line-height: 18px;
-            color: red;
+            color: #666;
             margin: 0;
             padding: 0;
             transition: all .3s;
-            text-align: right;
         }
 
         .details-list .list strong {
@@ -320,13 +319,13 @@
                     <div class="invoice-single-details">
                         <h4 class="invoice-details-title"><?php echo e(__('Bill To:')); ?></h4>
                         <ul class="details-list ">
-                            <li class="list"><?php echo e($payment->name); ?> </li>
-                            <li class="list"> <a mailto="<?php echo e($payment->name); ?>"><?php echo e($payment->email); ?> </a> </li>
-                            <li class="list"> <a callto="<?php echo e($payment->phone); ?>"><?php echo e($payment->phone); ?></a> </li>
-                            <li class="list"> <a callto="<?php echo e($payment->phone); ?>"><?php echo e($payment->created_at); ?></a> </li>
+                            <li class="list" style="color: red"><?php echo e($payment->name); ?> </li>
+                            <li class="list"> <a href="mailto:<?php echo e($payment->email); ?>"><?php echo e($payment->email); ?> </a> </li>
+                            <li class="list"> <a href="tel:<?php echo e($payment->phone); ?>"><?php echo e($payment->phone); ?></a> </li>
+                            <li class="list"><?php echo e($payment->created_at); ?></li>
                         </ul>
                     </div>
-                    <div class="invoice-single-details" style="float:right;margin-top:-120px;">
+                    <div class="invoice-single-details" style="float:right;margin-top:-141px;">
                         <h4 class="invoice-details-title"><?php echo e(__('Ship To:')); ?></h4>
                         <ul class="details-list">
                             <li class="list"> <strong><?php echo e(__('Address')); ?>: </strong> <?php echo e($payment->address); ?> </li>
