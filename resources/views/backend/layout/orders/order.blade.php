@@ -1,7 +1,7 @@
 @extends('backend.master')
 @section('content')
 <div class="py-5">
-  <table class="table">
+  <table class="table dataTable">
     <thead>
       <tr>
         <th scope="col">Date</th>
@@ -43,4 +43,7 @@
 
   </table>
 </div>
+<script>
+  $('.dataTable').DataTable();
+</script>
 @endsection

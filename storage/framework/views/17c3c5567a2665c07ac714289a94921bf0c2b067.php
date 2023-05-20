@@ -1,7 +1,7 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="py-5">
-    <table class="table">
+    <table class="table dataTable">
         <thead>
             <tr>
                 <th scope="col">Serial</th>
@@ -27,5 +27,9 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    $('.dataTable').DataTable();
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('backend.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\PHP\Laravel_project_1\resources\views/backend/layout/packages/package_list.blade.php ENDPATH**/ ?>

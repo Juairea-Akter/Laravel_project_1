@@ -2,7 +2,7 @@
 @section('content')
 <div class="py-5">
 
-    <table class="table">
+    <table class="table dataTable">
         <thead>
             <tr>
                 <th scope="col">Serial</th>
@@ -33,4 +33,7 @@
         </tbody>
     </table>
 </div>
+<script>
+    $('.dataTable').DataTable();
+</script>
 @endsection
