@@ -60,7 +60,7 @@
                 var max = maxDate.val();
                 var date = new Date( data[5] );
                 
-                console.table([min, max, date])
+                // console.table([min, max, date])
                 if (
                     ( min === null && max === null ) ||
                     ( min === null && date <= max ) ||
@@ -85,7 +85,8 @@
               {
                 extend: 'print',
                 title: function(){
-                    var printTitle = 'Appointment List';
+                  const dateTime = minDate.val() && maxDate.val() ? `From ${minDate.val().toDateString()} - ${maxDate.val().toDateString()}` : minDate.val() ? `From ${minDate.val().toDateString()}` : maxDate.val() ? `- ${maxDate.val().toDateString()}` : '';
+                    var printTitle = `Appointment List ${dateTime}`;
                     return printTitle
                 }
               }

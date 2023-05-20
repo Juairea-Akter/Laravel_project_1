@@ -90,7 +90,7 @@
                 var max = maxDate.val();
                 var date = new Date( data[0] );
                 
-                console.table([min, max, date])
+                // console.table([min, max, date])
                 if (
                     ( min === null && max === null ) ||
                     ( min === null && date <= max ) ||
@@ -109,13 +109,16 @@
         maxDate = new DateTime($('#max'), {
             format: 'MMMM Do YYYY'
         });
+        
+        
         var table = $('.paymentListDataTable').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 {
                     extend: 'print',
                     title: function(){
-                        var printTitle = 'Payment List';
+                        const dateTime = minDate.val() && maxDate.val() ? `From ${minDate.val().toDateString()} - ${maxDate.val().toDateString()}` : minDate.val() ? `From ${minDate.val().toDateString()}` : maxDate.val() ? `- ${maxDate.val().toDateString()}` : '';
+                        var printTitle = `Payment List ${dateTime}`;
                         return printTitle
                     }
                 }
