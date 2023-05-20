@@ -45,7 +45,7 @@
     </div>
 </div>
 <hr>
-<table class="table">
+<table class="table dataTable">
     <thead>
         <tr>
             <th scope="col">Serial</th>
@@ -103,5 +103,9 @@
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>
 </table>
+
+<script>
+    $('.dataTable').DataTable();
+</script>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('frontend.makeup_artist.makeup_artist_master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\PHP\Laravel_project_1\resources\views/frontend/makeup_artist/makeup_artist_layout/makeup_artist_co_artist/makeup_artist_co_artist_list.blade.php ENDPATH**/ ?>

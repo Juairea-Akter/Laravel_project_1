@@ -112,7 +112,13 @@
         var table = $('.paymentListDataTable').DataTable({
             dom: 'Bfrtip',
             buttons: [
-                'print'
+                {
+                    extend: 'print',
+                    title: function(){
+                        var printTitle = 'Payment List';
+                        return printTitle
+                    }
+                }
             ]
         });
 

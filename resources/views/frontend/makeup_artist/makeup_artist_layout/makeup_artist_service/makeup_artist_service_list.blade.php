@@ -60,7 +60,7 @@
     </div>
 </div>
 <hr>
-<table class="table">
+<table class="table dataTable">
     <thead>
         <tr>
             <th scope="col">Serial</th>
@@ -111,4 +111,7 @@
         @endforeach
     </tbody>
 </table>
+<script>
+    $('.dataTable').DataTable();
+</script>
 @endsection
