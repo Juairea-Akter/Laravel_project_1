@@ -178,5 +178,8 @@ Route::get('/generate-invoice/{id}/{value}', [PdfController::class, 'generate_in
 
 
 // Customer feedback
-Route::post('/customer/feedback/{order_id}', [FrontendController::class, 'customer_feedback_create'])->name('customer_feedback_create');
-Route::get('/customer/feedback/{order_id}', [FrontendController::class, 'customer_feedback_form'])->name('customer_feedback_form');
+Route::post('/customer/feedback/{sub_order_id}', [FrontendController::class, 'customer_feedback_create'])->name('customer_feedback_create');
+Route::get('/customer/feedback/{sub_order_id}', [FrontendController::class, 'customer_feedback_form'])->name('customer_feedback_form');
+
+// Customer customer feedback list
+Route::get('makeup/artist/customer/feedback', [ArtistController::class, 'makeup_artist_customer_feedback'])->name('makeup_artist_customer_feedback');

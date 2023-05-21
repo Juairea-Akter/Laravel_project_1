@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('customer_feedbacks', function(Blueprint $table){
             $table->id();
             $table->string('user_id');
-            $table->string('order_id');
+            $table->string('sub_order_id');
             $table->integer('rating');
             $table->string('feedback');
             $table->timestamps();

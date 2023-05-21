@@ -317,12 +317,12 @@ class FrontendController extends Controller
    }
 
    // Customer feedback create
-   public function customer_feedback_create(Request $request, $order_id)
+   public function customer_feedback_create(Request $request, $sub_order_id)
    {
       $user_id = auth()->user()->id;
       $feedback = customer_feedback::create([
          'user_id' => $user_id,
-         'order_id' => $order_id,
+         'sub_order_id' => $sub_order_id,
          'rating' => $request->rating,
          'feedback' => $request->feedback,
       ]);
@@ -330,9 +330,9 @@ class FrontendController extends Controller
    }
 
    // customer feedback form
-   public function customer_feedback_form($order_id)
+   public function customer_feedback_form($sub_order_id)
    {
-      return view('frontend.layouts.customer_feedback.customer_feedback_form', compact('order_id'));
+      return view('frontend.layouts.customer_feedback.customer_feedback_form', compact('sub_order_id'));
    }
 
    // Customer feedback list

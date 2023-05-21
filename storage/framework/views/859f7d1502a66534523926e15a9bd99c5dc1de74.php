@@ -58,7 +58,7 @@
                             
                         <?php elseif($payment->order->sub_order->status == 2): ?>
                             <span>Complete</span>
-                            <a href="<?php echo e(route("customer_feedback_form", $payment->order->id)); ?>">Review</a>
+                            <a href="<?php echo e(route("customer_feedback_form", $payment->order->sub_order->id)); ?>">Review</a>
                         <?php endif; ?>
                     </td>
                     <td>

@@ -59,7 +59,7 @@
                         @elseif ($payment->order->sub_order->status == 2)
                             <span>Complete</span>
                             <a href="{{
-                                route("customer_feedback_form", $payment->order->id)
+                                route("customer_feedback_form", $payment->order->sub_order->id)
                             }}">Review</a>
                         @endif
                     </td>

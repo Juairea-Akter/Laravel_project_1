@@ -10,7 +10,7 @@
         </div>
     @endif
     <form action="{{
-        route('customer_feedback_create', $order_id)
+        route('customer_feedback_create', $sub_order_id)
     }}" method="post">
     @csrf
         <div class="form-group mb-4">

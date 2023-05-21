@@ -26,4 +26,7 @@ class sub_order extends Model
     {
         return $this->hasOne(payment::class, 'order_id', 'order_id');
     }
+    public function artist(){
+        return $this->belongsTo(User::class, 'makeup_artist_id', 'id');
+    }
 }

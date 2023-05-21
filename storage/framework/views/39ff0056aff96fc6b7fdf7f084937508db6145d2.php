@@ -9,7 +9,7 @@
             <p class="mx-0 px-0">Your feedback is very important to us.</p>
         </div>
     <?php endif; ?>
-    <form action="<?php echo e(route('customer_feedback_create', $order_id)); ?>" method="post">
+    <form action="<?php echo e(route('customer_feedback_create', $sub_order_id)); ?>" method="post">
     <?php echo csrf_field(); ?>
         <div class="form-group mb-4">
             <label for="forRating">Rating</label>

@@ -10,9 +10,9 @@ class customer_feedback extends Model
     use HasFactory;
     protected $guarded = [];  
     
-    public function  order()
+    public function  sub_order()
     {
-        return $this->belongsTo(order::class, 'order_id', 'id');
+        return $this->belongsTo(sub_order::class, 'sub_order_id', 'id');
     }
     public function user()
     {

@@ -29,6 +29,12 @@
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="<?php echo e(route('makeup_artist_customer_feedback')); ?>">
+          <span data-feather="inbox" class="align-text-bottom"></span>
+          Customer feedbacks
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="<?php echo e(route('makeup_artist_profile')); ?>">
           <span data-feather="users" class="align-text-bottom"></span>
           Profile

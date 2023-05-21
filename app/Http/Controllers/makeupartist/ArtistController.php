@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\co_artist;
+use App\Models\customer_feedback;
 use App\Models\order;
 use App\Models\packages;
 use App\Models\sub_category;
@@ -233,5 +234,14 @@ class ArtistController extends Controller
     {
         $user = User::find(auth()->user()->id);
         return view('frontend.makeup_artist.makeup_artist_layout.artist_profile.edit_artist_profile', compact('user'));
+    }
+
+    // Customer feedbacks
+    public function makeup_artist_customer_feedback()
+    {
+        $feedbacks = customer_feedback::all();
+
+        // dd($orders);
+        return view('frontend.makeup_artist.makeup_artist_layout.makeup_artist_customer_feedback_list', compact('feedbacks'));
     }
 }
