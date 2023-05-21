@@ -173,5 +173,5 @@ Route::get('appointment/order/action/{id}/{value}', [ArtistController::class, 'm
 Route::get('makeup/artist/profile/edit', [ArtistController::class, 'makeup_artist_profile'])->name('makeup_artist_profile');
 
 // invoice generator
-Route::get('/generate-invoice/{id}', [PdfController::class, 'generate_invoice']);
+Route::get('/generate-invoice/{id}/{value}', [PdfController::class, 'generate_invoice'])->name('generate_invoice');
 // Route::get('/download-invoice', [PdfController::class, 'download_invoice']);

@@ -27,6 +27,7 @@
         <th scope="col">Payment Status</th>
         <th scope="col">Order Status</th>
         <th scope="col">Order Action</th>
+        <th scope="col">Payment Action</th>
       </tr>
     </thead>
     <tbody>
@@ -62,6 +63,9 @@
           <a href="<?php echo e(route('makeup_artist_appointment_order_action', [$order->id,1])); ?>" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></a>
           <?php endif; ?>
         </td>
+        <td>
+          <a href=<?php echo e(route("generate_invoice",[$order->payment->id,"Artist copy"])); ?> class="btn btn-primary">Print</a>
+      </td>
       </tr>
       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </tbody>

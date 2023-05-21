@@ -52,7 +52,7 @@
                         <?php echo csrf_field(); ?>
                         <?php echo method_field('PUT'); ?>
                         <button type="submit" class="btn btn-primary">Confirm</button>
-                        <a href="/generate-invoice/<?php echo e($payment->id); ?>" class="btn btn-success">Print</button>
+                        <a href=<?php echo e(route("generate_invoice",[$payment->id,"Admin copy"])); ?> class="btn btn-success">Print</a>
                     </form>
 
                 </td>

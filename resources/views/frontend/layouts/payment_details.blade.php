@@ -61,7 +61,9 @@
                         @endif
                     </td>
                     <td>
-                        <a href="/generate-invoice/{{$payment->id}}" class="btn btn-primary">Print</a>
+                        <a href={{
+                            route("generate_invoice",[$payment->id,"Customer copy"])
+                          }} class="btn btn-primary">Print</a>
                     </td>
                 </tr>
                 @endforeach

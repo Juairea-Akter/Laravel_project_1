@@ -8,10 +8,10 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class PdfController extends Controller
 {
-    public function generate_invoice($id)
+    public function generate_invoice($id,$value)
     {
         $payment = payment::find($id);
-        $pdf = Pdf::loadView('billing_invoice', compact('payment'));
+        $pdf = Pdf::loadView('billing_invoice', compact('payment', 'value'));
         return $pdf->stream('billing-invoice');
     }
 

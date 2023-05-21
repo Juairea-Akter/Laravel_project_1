@@ -304,8 +304,9 @@
             <div class="invoice-header">
                 <div class="invoice-flex-contents">
                     <div class="invoice-logo">
-                        <h2 class="invoice-title"><?php echo e(__('INVOICE')); ?></h2>
+                        <h2 class="invoice-title"><?php echo e(__('INVOICE')); ?> (<?php echo e($value); ?>)</h2>
                         <p>#<?php echo e($payment->invoiceId); ?></p>
+                        <span>Payment Status:</span>
                         <?php if($payment->status == 2): ?>
                         <b>Confirmed</b>
                         <?php elseif($payment->status == 1): ?>

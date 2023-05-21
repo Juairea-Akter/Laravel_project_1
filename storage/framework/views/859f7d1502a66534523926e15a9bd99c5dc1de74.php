@@ -61,7 +61,7 @@
                         <?php endif; ?>
                     </td>
                     <td>
-                        <a href="/generate-invoice/<?php echo e($payment->id); ?>" class="btn btn-primary">Print</a>
+                        <a href=<?php echo e(route("generate_invoice",[$payment->id,"Customer copy"])); ?> class="btn btn-primary">Print</a>
                     </td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

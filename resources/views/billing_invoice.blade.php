@@ -304,8 +304,9 @@
             <div class="invoice-header">
                 <div class="invoice-flex-contents">
                     <div class="invoice-logo">
-                        <h2 class="invoice-title">{{ __('INVOICE') }}</h2>
+                        <h2 class="invoice-title">{{ __('INVOICE') }} ({{$value}})</h2>
                         <p>#{{$payment->invoiceId}}</p>
+                        <span>Payment Status:</span>
                         @if($payment->status == 2)
                         <b>Confirmed</b>
                         @elseif($payment->status == 1)

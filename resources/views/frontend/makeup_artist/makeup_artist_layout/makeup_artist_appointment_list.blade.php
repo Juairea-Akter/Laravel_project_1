@@ -27,6 +27,7 @@
         <th scope="col">Payment Status</th>
         <th scope="col">Order Status</th>
         <th scope="col">Order Action</th>
+        <th scope="col">Payment Action</th>
       </tr>
     </thead>
     <tbody>
@@ -66,6 +67,11 @@
           }}" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></a>
           @endif
         </td>
+        <td>
+          <a href={{
+            route("generate_invoice",[$order->payment->id,"Artist copy"])
+          }} class="btn btn-primary">Print</a>
+      </td>
       </tr>
       @endforeach
     </tbody>

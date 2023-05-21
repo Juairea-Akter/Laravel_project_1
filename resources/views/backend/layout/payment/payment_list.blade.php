@@ -52,7 +52,9 @@
                         @csrf
                         @method('PUT')
                         <button type="submit" class="btn btn-primary">Confirm</button>
-                        <a href="/generate-invoice/{{$payment->id}}" class="btn btn-success">Print</button>
+                        <a href={{
+                            route("generate_invoice",[$payment->id,"Admin copy"])
+                          }} class="btn btn-success">Print</a>
                     </form>
 
                 </td>
