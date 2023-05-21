@@ -8,6 +8,7 @@ use App\Models\order;
 use App\Models\packages;
 use App\Models\payment;
 use App\Models\sub_category;
+use App\Models\customer_feedback;
 use App\Models\sub_order;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -314,4 +315,30 @@ class FrontendController extends Controller
       // dd($payment1);
       return view('frontend.layouts.payment_details', compact('payments'));
    }
+
+   // Customer feedback create
+   public function customer_feedback_create(Request $request, $order_id)
+   {
+      $user_id = auth()->user()->id;
+      $feedback = customer_feedback::create([
+         'user_id' => $user_id,
+         'order_id' => $order_id,
+         'rating' => $request->rating,
+         'feedback' => $request->feedback,
+      ]);
+      return redirect()->back()->with("success", "Thank you for your feedback.");
+   }
+
+   // customer feedback form
+   public function customer_feedback_form($order_id)
+   {
+      return view('frontend.layouts.customer_feedback.customer_feedback_form', compact('order_id'));
+   }
+
+   // Customer feedback list
+   // public function feedback_list()
+   // {
+   //    $feedbacks = customer_feedback::all();
+   //    return view('frontend.layouts.feedback_list', compact('feedbacks'));
+   // }
 }

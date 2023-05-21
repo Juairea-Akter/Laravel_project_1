@@ -175,3 +175,8 @@ Route::get('makeup/artist/profile/edit', [ArtistController::class, 'makeup_artis
 // invoice generator
 Route::get('/generate-invoice/{id}/{value}', [PdfController::class, 'generate_invoice'])->name('generate_invoice');
 // Route::get('/download-invoice', [PdfController::class, 'download_invoice']);
+
+
+// Customer feedback
+Route::post('/customer/feedback/{order_id}', [FrontendController::class, 'customer_feedback_create'])->name('customer_feedback_create');
+Route::get('/customer/feedback/{order_id}', [FrontendController::class, 'customer_feedback_form'])->name('customer_feedback_form');

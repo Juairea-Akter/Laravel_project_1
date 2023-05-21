@@ -58,6 +58,9 @@
                             
                         @elseif ($payment->order->sub_order->status == 2)
                             <span>Complete</span>
+                            <a href="{{
+                                route("customer_feedback_form", $payment->order->id)
+                            }}">Review</a>
                         @endif
                     </td>
                     <td>
