@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('invoiceId');
             $table->string('name');
-            $table->bigInteger('user_id')->nullable();
-            $table->bigInteger('order_id')->nullable();
+            $table->string('user_id');
+            $table->string('order_id');
             $table->string('address');
             $table->string('email');
             $table->string('phone');

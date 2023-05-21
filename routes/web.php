@@ -166,6 +166,8 @@ Route::get('makeup/artist/co_artist/list/delete/{id}', [ArtistController::class,
 
 // APPOINTMENT LIST
 Route::get('appointment/list', [ArtistController::class, 'makeup_artist_appointment_list'])->name('makeup_artist_appointment_list');
+// Appointment order action
+Route::get('appointment/order/action/{id}/{value}', [ArtistController::class, 'makeup_artist_appointment_order_action'])->name('makeup_artist_appointment_order_action');
 
 // PROFILE EDIT
 Route::get('makeup/artist/profile/edit', [ArtistController::class, 'makeup_artist_profile'])->name('makeup_artist_profile');

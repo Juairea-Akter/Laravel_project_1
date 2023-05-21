@@ -14,6 +14,11 @@ class payment extends Model
         return $this->belongsTo(packages::class, 'package_id', 'id');
     }
 
+    public function  order()
+    {
+        return $this->belongsTo(order::class, 'order_id', 'id');
+    }
+
     public function artist()
     {
         return $this->belongsTo(User::class, 'makeup_artist_id', 'id');

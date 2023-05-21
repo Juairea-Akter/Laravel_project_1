@@ -203,6 +203,15 @@ class ArtistController extends Controller
         return view('frontend.makeup_artist.makeup_artist_layout.makeup_artist_appointment_list', compact('orders'));
     }
 
+    // Appointment order action
+    public function makeup_artist_appointment_order_action($id, $value)
+    {
+        $order = sub_order::find($id);
+        $order->update([
+            'status' => $value,
+        ]);
+        return back();
+    }
 
 
 

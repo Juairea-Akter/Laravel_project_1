@@ -24,7 +24,9 @@
         <th scope="col">Packages Name</th>
         <th scope="col">Date</th>
         <th scope="col">Time</th>
-        <th scope="col">Payment status</th>
+        <th scope="col">Payment Status</th>
+        <th scope="col">Order Status</th>
+        <th scope="col">Order Action</th>
       </tr>
     </thead>
     <tbody>
@@ -42,6 +44,22 @@
           <span>Pending</span>
           <?php elseif($order->payment->status == 2): ?>
           <span>Confirmed</span>
+          <?php endif; ?>
+        </td>
+        <td>
+          <?php if($order->status == 1): ?>
+              <span>In progress</span>
+              
+          <?php elseif($order->status == 2): ?>
+              <span>Completed</span>
+          <?php endif; ?>
+        </td>
+        <td>
+          <?php if($order->status == 1): ?>
+            <a href="<?php echo e(route('makeup_artist_appointment_order_action', [$order->id,2])); ?>" class="btn btn-success"><i class="fa-solid fa-check"></i></a>
+              
+          <?php else: ?>
+          <a href="<?php echo e(route('makeup_artist_appointment_order_action', [$order->id,1])); ?>" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></a>
           <?php endif; ?>
         </td>
       </tr>

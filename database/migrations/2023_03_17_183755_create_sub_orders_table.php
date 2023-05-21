@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('sub_total')->nullable();
             $table->string('time');
             $table->date('date')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }
