@@ -27,6 +27,7 @@
                     <th scope="col">Transaction Amount</th>
                     <th scope="col">Payment Status</th>
                     <th scope="col">Order Status</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,6 +59,9 @@
                         @elseif ($payment->order->sub_order->status == 2)
                             <span>Complete</span>
                         @endif
+                    </td>
+                    <td>
+                        <a href="/generate-invoice/{{$payment->id}}" class="btn btn-primary">Print</a>
                     </td>
                 </tr>
                 @endforeach

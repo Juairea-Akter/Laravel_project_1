@@ -27,6 +27,7 @@
                     <th scope="col">Transaction Amount</th>
                     <th scope="col">Payment Status</th>
                     <th scope="col">Order Status</th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,6 +59,9 @@
                         <?php elseif($payment->order->sub_order->status == 2): ?>
                             <span>Complete</span>
                         <?php endif; ?>
+                    </td>
+                    <td>
+                        <a href="/generate-invoice/<?php echo e($payment->id); ?>" class="btn btn-primary">Print</a>
                     </td>
                 </tr>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
