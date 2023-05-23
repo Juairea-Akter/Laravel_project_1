@@ -347,15 +347,41 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php if($payment->package_id != null): ?>
+                            <tr>
+                                <td><?php echo e($payment->package->package_name); ?></td>
+                                <td><?php echo e($payment->package->package_price); ?> Tk</td>
+                                <td>1</td>
+                                <td><?php echo e($payment->package->package_price); ?> Tk</td>
+                            </tr>
+                            <tr class="table_footer_row">
+                                <td colspan="3"><strong><?php echo e(__('Sub Total')); ?></strong></td>
+                                <td><strong><?php echo e($payment->package->package_price); ?> Tk</strong></td>
+                            </tr>
+                            <tr class="table_footer_row">
+                                <td colspan="3"><strong><?php echo e(__('Tax (10%)')); ?></strong></td>
+                                <td><strong><?php echo e(($payment->package->package_price / 100) * 10); ?> Tk</strong></td>
+                            </tr>
+                            
+                        <?php else: ?>
                         <tr>
-                            <td><?php echo e($payment->package->package_name); ?></td>
-                            <td><?php echo e($payment->package->package_price); ?> Tk</td>
+                            <td><?php echo e($payment->order->service_description); ?></td>
+                            <td><?php echo e($payment->order->total); ?> Tk</td>
                             <td>1</td>
-                            <td><?php echo e($payment->package->package_price); ?> Tk</td>
+                            <td><?php echo e($payment->order->total); ?> Tk</td>
                         </tr>
                         <tr class="table_footer_row">
+                            <td colspan="3"><strong><?php echo e(__('Sub Total')); ?></strong></td>
+                            <td><strong><?php echo e($payment->order->total); ?> Tk</strong></td>
+                        </tr>
+                        <tr class="table_footer_row">
+                            <td colspan="3"><strong><?php echo e(__('Tax (10%)')); ?></strong></td>
+                            <td><strong><?php echo e(($payment->order->total / 100) * 10); ?> Tk</strong></td>
+                        </tr>
+                        <?php endif; ?>
+                        <tr class="table_footer_row">
                             <td colspan="3"><strong><?php echo e(__('Total')); ?></strong></td>
-                            <td><strong><?php echo e($payment->package->package_price); ?> Tk</strong></td>
+                            <td><strong><?php echo e($payment->transaction_amount); ?> Tk</strong></td>
                         </tr>
                     </tbody>
                 </table>

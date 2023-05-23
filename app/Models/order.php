@@ -23,5 +23,10 @@ class order extends Model
         return $this ->belongsTo(packages::class,'order_id', 'id');
     }
 
+    public function payment()
+    {
+        return $this ->hasOne(payment::class,'order_id', 'id');
+    }
+
 
 }

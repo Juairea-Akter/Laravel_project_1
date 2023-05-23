@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('transaction_number');
             $table->string('transaction_amount');
-            $table->string('package_id');
+            $table->string('package_id')->nullable();
             $table->string('makeup_artist_id');
             $table->string('status');
             $table->string('date');

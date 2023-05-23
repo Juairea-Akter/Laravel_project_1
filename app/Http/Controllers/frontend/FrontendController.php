@@ -9,6 +9,7 @@ use App\Models\packages;
 use App\Models\payment;
 use App\Models\sub_category;
 use App\Models\customer_feedback;
+use App\Models\services;
 use App\Models\sub_order;
 use App\Models\User;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -135,6 +136,7 @@ class FrontendController extends Controller
          'address' => auth()->user()->address,
          'email' => auth()->user()->email,
          'phone' => auth()->user()->phone,
+         'type' => 'package',
          'total' => floatval(str_replace(',', '', $subtotal))
       ]);
 
@@ -157,6 +159,53 @@ class FrontendController extends Controller
       //dd($time,$date);
       Cart::destroy();
       return redirect()->route('payment', compact('time', 'date', 'packageId', 'orderId'));
+   }
+
+   // Place service order
+   public function service_order(Request $request){
+      $date = $request->date;
+      $artist_id = $request->artistId;
+      $service = $request->service;
+      $total = $request->subTotal;
+      $transaction_number = $request->transaction_number;
+      $transaction_amount = $request->transaction_amount;
+
+      $serviceDescription = "Services: ";
+      foreach($service as $key => $value){
+         $service = services::where('id', $value)->first();
+         $serviceDescription .= $service->service_name.",";
+      }
+      // dd($artist_id);
+
+      // create order
+      $order = order::create([
+         'user_id' => auth()->user()->id,
+         'address' => auth()->user()->address,
+         'email' => auth()->user()->email,
+         'phone' => auth()->user()->phone,
+         'type' => 'service',
+         'service_description' => $serviceDescription,
+         'total' => floatval(str_replace(',', '', $total))
+      ]);
+
+      // generate unique invoice number 
+      $invoiceId = uniqid();
+
+      payment::create([
+         'name' => auth()->user()->name,
+         'invoiceId' => $invoiceId,
+         'user_id' => auth()->user()->id,
+         'order_id' => $order->id,
+         'address' => auth()->user()->address,
+         'email' => auth()->user()->email,
+         'phone' => auth()->user()->phone,
+         'transaction_number' => $transaction_number,
+         'transaction_amount' => $transaction_amount,
+         'makeup_artist_id' => $artist_id,
+         'status' => 1,
+         'date' => $date,
+      ]);
+      return back()->with('success', 'Your order has been placed successfully');
    }
 
    // PLACE ORDER
@@ -335,10 +384,12 @@ class FrontendController extends Controller
       return view('frontend.layouts.customer_feedback.customer_feedback_form', compact('sub_order_id'));
    }
 
-   // Customer feedback list
-   // public function feedback_list()
-   // {
-   //    $feedbacks = customer_feedback::all();
-   //    return view('frontend.layouts.feedback_list', compact('feedbacks'));
-   // }
+   // Custom package create
+   public function custom_package_create_form(Request $request)
+   {
+      $services = services::all();
+      $makeupArtists = User::where('role_id', 2)->get();
+      return view('frontend.layouts.create_package.create_package_form', compact('makeupArtists','services'));
+   }
+   
 }

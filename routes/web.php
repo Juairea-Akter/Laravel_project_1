@@ -181,5 +181,11 @@ Route::get('/generate-invoice/{id}/{value}', [PdfController::class, 'generate_in
 Route::post('/customer/feedback/{sub_order_id}', [FrontendController::class, 'customer_feedback_create'])->name('customer_feedback_create');
 Route::get('/customer/feedback/{sub_order_id}', [FrontendController::class, 'customer_feedback_form'])->name('customer_feedback_form');
 
-// Customer customer feedback list
+// Customer feedback list
 Route::get('makeup/artist/customer/feedback', [ArtistController::class, 'makeup_artist_customer_feedback'])->name('makeup_artist_customer_feedback');
+
+// Custom package
+Route::get('/custom/package', [FrontendController::class, 'custom_package_create_form'])->name('custom_package_create_form');
+
+// service order
+Route::post('/custom/package', [FrontendController::class, 'service_order'])->name('service_order');

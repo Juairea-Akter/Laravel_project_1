@@ -20,7 +20,6 @@
             <tr>
                 <th scope="col">Date</th>
                 <th scope="col">Invoice</th>
-                <th scope="col">Package Name</th>
                 <th scope="col">Customer Name</th>
                 <th scope="col">Customer Email</th>
                 <th scope="col">Customer Phone</th>
@@ -39,7 +38,6 @@
 
                 <td>{{$payment->created_at}}</td>
                 <td>{{$payment->invoiceId}}</td>
-                <td>{{$payment->package->package_name}}</td>
                 <td>{{$payment->name}}</td>
                 <td>{{$payment->email}}</td>
                 <td>{{$payment->phone}}</td>
@@ -118,6 +116,7 @@
             buttons: [
                 {
                     extend: 'print',
+                    className: 'btn btn-primary',
                     title: function(){
                         const dateTime = minDate.val() && maxDate.val() ? `From ${minDate.val().toDateString()} - ${maxDate.val().toDateString()}` : minDate.val() ? `From ${minDate.val().toDateString()}` : maxDate.val() ? `- ${maxDate.val().toDateString()}` : '';
                         var printTitle = `Payment List ${dateTime}`;

@@ -347,15 +347,41 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($payment->package_id != null)
+                            <tr>
+                                <td>{{$payment->package->package_name}}</td>
+                                <td>{{$payment->package->package_price}} Tk</td>
+                                <td>1</td>
+                                <td>{{$payment->package->package_price}} Tk</td>
+                            </tr>
+                            <tr class="table_footer_row">
+                                <td colspan="3"><strong>{{ __('Sub Total') }}</strong></td>
+                                <td><strong>{{$payment->package->package_price}} Tk</strong></td>
+                            </tr>
+                            <tr class="table_footer_row">
+                                <td colspan="3"><strong>{{ __('Tax (10%)') }}</strong></td>
+                                <td><strong>{{($payment->package->package_price / 100) * 10}} Tk</strong></td>
+                            </tr>
+                            
+                        @else
                         <tr>
-                            <td>{{$payment->package->package_name}}</td>
-                            <td>{{$payment->package->package_price}} Tk</td>
+                            <td>{{$payment->order->service_description}}</td>
+                            <td>{{$payment->order->total}} Tk</td>
                             <td>1</td>
-                            <td>{{$payment->package->package_price}} Tk</td>
+                            <td>{{$payment->order->total}} Tk</td>
                         </tr>
                         <tr class="table_footer_row">
+                            <td colspan="3"><strong>{{ __('Sub Total') }}</strong></td>
+                            <td><strong>{{$payment->order->total }} Tk</strong></td>
+                        </tr>
+                        <tr class="table_footer_row">
+                            <td colspan="3"><strong>{{ __('Tax (10%)') }}</strong></td>
+                            <td><strong>{{($payment->order->total / 100) * 10}} Tk</strong></td>
+                        </tr>
+                        @endif
+                        <tr class="table_footer_row">
                             <td colspan="3"><strong>{{ __('Total') }}</strong></td>
-                            <td><strong>{{$payment->package->package_price}} Tk</strong></td>
+                            <td><strong>{{$payment->transaction_amount}} Tk</strong></td>
                         </tr>
                     </tbody>
                 </table>

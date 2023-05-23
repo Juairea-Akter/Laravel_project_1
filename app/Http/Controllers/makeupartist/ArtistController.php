@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\category;
 use App\Models\co_artist;
 use App\Models\customer_feedback;
+use App\Models\payment;
 use App\Models\order;
 use App\Models\packages;
 use App\Models\sub_category;
@@ -197,17 +198,18 @@ class ArtistController extends Controller
     // APPOINTMENT LIST
     public function makeup_artist_appointment_list()
     {
-        $orders = sub_order::where('makeup_artist_id', auth()->user()->id)->get();
+        $payments = payment::where('makeup_artist_id', auth()->user()->id)->get();
+        $sub_orders = sub_order::where('makeup_artist_id', auth()->user()->id)->get();
         // foreach ($orders as $order) {
         //     echo $order->customer->name ?? "No Name";
         // }
-        return view('frontend.makeup_artist.makeup_artist_layout.makeup_artist_appointment_list', compact('orders'));
+        return view('frontend.makeup_artist.makeup_artist_layout.makeup_artist_appointment_list', compact('sub_orders','payments'));
     }
 
     // Appointment order action
     public function makeup_artist_appointment_order_action($id, $value)
     {
-        $order = sub_order::find($id);
+        $order = order::find($id);
         $order->update([
             'status' => $value,
         ]);
